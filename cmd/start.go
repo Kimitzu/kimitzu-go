@@ -675,7 +675,7 @@ func (x *Start) Execute(args []string) error {
 		}
 		core.Node.Service = service.New(core.Node, sqliteDB)
 		core.Node.Service.WaitForReady()
-		log.Info("OpenBazaar Service Ready")
+		log.Info("Djali(OpenBazaar) Service Ready")
 
 		core.Node.StartMessageRetriever()
 		core.Node.StartPointerRepublisher()
@@ -930,23 +930,23 @@ func InitializeRepo(dataDir, password, mnemonic string, testnet bool, creationDa
 }
 
 func printSplashScreen(verbose bool) {
-	blue := color.New(color.FgBlue)
+	blue := color.New(color.FgRed)
 	white := color.New(color.FgWhite)
 
 	for i, l := range []string{
-		"________             ",
-		"         __________",
-		`\_____  \ ______   ____   ____`,
-		`\______   \_____  _____________  _____ _______`,
-		` /   |   \\____ \_/ __ \ /    \`,
-		`|    |  _/\__  \ \___   /\__  \ \__  \\_  __ \ `,
-		`/    |    \  |_> >  ___/|   |  \    `,
-		`|   \ / __ \_/    /  / __ \_/ __ \|  | \/`,
-		`\_______  /   __/ \___  >___|  /`,
-		`______  /(____  /_____ \(____  (____  /__|`,
-		`        \/|__|        \/     \/  `,
-		`     \/      \/      \/     \/     \/`,
-	} {
+		"             ", ".---.                    ",
+		`_______      `, `|   |          .---.     `,
+		"\\  ___ `'.   ", `'---'          |   |.--. `,
+		` ' |--.\  \  `, `.---.          |   ||__| `,
+		` | |    \  ' `, `|   |          |   |.--. `,
+		` | |     |  '`, `|   |    __    |   ||  | `,
+		` | |     |  |`, `|   | .:--.'.  |   ||  | `,
+		` | |     ' .'`, `|   |/ |   \ | |   ||  | `,
+		` | |___.' /' `, "|   |`\" __ | | |   ||  | ",
+		`/_______.'/  `, `|   | .'.''| | |   ||__| `,
+		`\_______|/`, `__.'   '/ /   | |_'---'     `,
+		`         `, `|      ' \ \._,\ '/          `,
+		`         `, "|____.'   `--'  `\"           "} {
 		if i%2 == 0 {
 			if _, err := white.Printf(l); err != nil {
 				log.Debug(err)
@@ -963,7 +963,7 @@ func printSplashScreen(verbose bool) {
 	blue.DisableColor()
 	white.DisableColor()
 	fmt.Println("")
-	fmt.Println("OpenBazaar Server v" + core.VERSION)
+	fmt.Println("Djali(OpenBazaar) Server v" + core.VERSION)
 	if !verbose {
 		fmt.Println("[Press Ctrl+C to exit]")
 	}
