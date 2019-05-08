@@ -947,7 +947,7 @@ func printSplashScreen(verbose bool) {
 		`\_______|/`, `__.'   '/ /   | |_'---'     `,
 		`         `, `|      ' \ \._,\ '/          `,
 		`         `, "|____.'   `--'  `\"           "} {
-		if i%2 == 0 {
+		if i%2 != 0 {
 			if _, err := white.Printf(l); err != nil {
 				log.Debug(err)
 				return
@@ -959,7 +959,6 @@ func printSplashScreen(verbose bool) {
 			return
 		}
 	}
-
 	blue.DisableColor()
 	white.DisableColor()
 	fmt.Println("")

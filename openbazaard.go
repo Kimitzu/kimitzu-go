@@ -24,6 +24,7 @@ var opts Opts
 var parser = flags.NewParser(&opts, flags.Default)
 
 func main() {
+	fmt.Println("Starting Server")
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	go func() {
