@@ -930,7 +930,7 @@ func InitializeRepo(dataDir, password, mnemonic string, testnet bool, creationDa
 }
 
 func printSplashScreen(verbose bool) {
-	blue := color.New(color.FgRed)
+	red := color.New(color.FgRed)
 	white := color.New(color.FgWhite)
 
 	for i, l := range []string{
@@ -947,19 +947,19 @@ func printSplashScreen(verbose bool) {
 		`\_______|/`, `__.'   '/ /   | |_'---'     `,
 		`         `, `|      ' \ \._,\ '/          `,
 		`         `, "|____.'   `--'  `\"           "} {
-		if i%2 != 0 {
-			if _, err := white.Printf(l); err != nil {
+		if i%2 == 0 {
+			if _, err := red.Printf(l); err != nil {
 				log.Debug(err)
 				return
 			}
 			continue
 		}
-		if _, err := blue.Println(l); err != nil {
+		if _, err := white.Println(l); err != nil {
 			log.Debug(err)
 			return
 		}
 	}
-	blue.DisableColor()
+	red.DisableColor()
 	white.DisableColor()
 	fmt.Println("")
 	fmt.Println("Djali(OpenBazaar) Server v" + core.VERSION)
