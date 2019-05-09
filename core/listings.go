@@ -73,10 +73,23 @@ type price struct {
 	Amount       uint64  `json:"amount"`
 	Modifier     float32 `json:"modifier"`
 }
+
 type thumbnail struct {
 	Tiny   string `json:"tiny"`
 	Small  string `json:"small"`
 	Medium string `json:"medium"`
+}
+
+type location struct {
+	Latitude   string `json:"latitude"`
+	Longitude  string `json:"longitude"`
+	PlusCode   string `json:"plusCode"`
+	AddressOne string `json:"addressOne"`
+	AddressTwo string `json:"addressTwo"`
+	City       string `json:"city"`
+	State      string `json:"state"`
+	Country    string `json:"country"`
+	ZipCode    string `json:"zipCode"`
 }
 
 // ListingData - represent a listing
@@ -98,6 +111,7 @@ type ListingData struct {
 	ModeratorIDs       []string  `json:"moderators"`
 	AcceptedCurrencies []string  `json:"acceptedCurrencies"`
 	CoinType           string    `json:"coinType"`
+	Location           location  `json:"location"`
 }
 
 var (
@@ -521,6 +535,17 @@ func (n *OpenBazaarNode) extractListingData(listing *pb.SignedListing) (ListingD
 		Language:           listing.Listing.Metadata.Language,
 		ModeratorIDs:       listing.Listing.Moderators,
 		AcceptedCurrencies: listing.Listing.Metadata.AcceptedCurrencies,
+		Location: location{
+			Latitude:   listing.Listing.Location.Latitude,
+			Longitude:  listing.Listing.Location.Longitude,
+			PlusCode:   listing.Listing.Location.PlusCode,
+			AddressOne: listing.Listing.Location.AddressOne,
+			AddressTwo: listing.Listing.Location.AddressTwo,
+			City:       listing.Listing.Location.City,
+			State:      listing.Listing.Location.State,
+			Country:    listing.Listing.Location.Country,
+			ZipCode:    listing.Listing.Location.ZipCode,
+		},
 	}
 	return ld, nil
 }

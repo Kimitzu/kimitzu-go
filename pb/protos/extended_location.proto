@@ -10,15 +10,15 @@ message ExtLocation {
 }
 
 message Address {
-    string lat          = 1;
-    string lon          = 2;
-    string plusCode     = 3;
+    string latitude         = 1;
+    string longitude        = 2;
+    string plusCode         = 3;
 
-    string addressOne   = 4;
-    string addressTwo   = 5;
+    string addressOne       = 4;
+    string addressTwo       = 5;
 
-    string city         = 6;
-    string state        = 7;
-    string country      = 8;
-    string zipCode      = 9;
+    string city             = 6;
+    string state            = 7;
+    string country          = 8;
+    string zipCode          = 9;
 }

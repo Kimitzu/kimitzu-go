@@ -1,9 +1,9 @@
 syntax = "proto3";
 option go_package = "pb";
 
-
 import "countrycodes.proto";
 import "google/protobuf/timestamp.proto";
+import "extended_location.proto";
 
 message RicardianContract {
     repeated Listing vendorListings                    = 1;
@@ -30,6 +30,8 @@ message Listing {
     repeated string moderators              = 8;
     string termsAndConditions               = 9;
     string refundPolicy                     = 10;
+    
+    Address location                        = 6661;
 
     message Metadata {
         uint32 version                     = 1;
