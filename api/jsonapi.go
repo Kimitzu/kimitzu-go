@@ -8,8 +8,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"gx/ipfs/QmQmhotPUzVrMEWNK3x1R5jQ5ZHWyL7tVUrmRPjrBrvyCb/go-ipfs-files"
-	"gx/ipfs/QmXLwxifxwfc2bAwq6rdjbYqAsGzWsDE9RM5TWMGtykyj6/interface-go-ipfs-core"
+	files "gx/ipfs/QmQmhotPUzVrMEWNK3x1R5jQ5ZHWyL7tVUrmRPjrBrvyCb/go-ipfs-files"
+	iface "gx/ipfs/QmXLwxifxwfc2bAwq6rdjbYqAsGzWsDE9RM5TWMGtykyj6/interface-go-ipfs-core"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
@@ -216,6 +216,11 @@ func SanitizedResponse(w http.ResponseWriter, response string) {
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	// [djali] - Sets Additional Core Requirements for better inter-operation
+	// 		with the Djali Client.
+	// TODO: Preferably move this somewhere else in the future.
+	w.Header().Set("Node-Agent", core.USERAGENT)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, string(ret))
 }
 
@@ -225,6 +230,11 @@ func SanitizedResponseM(w http.ResponseWriter, response string, m proto.Message)
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	// [djali] - Sets Additional Core Requirements for better inter-operation
+	// 		with the Djali Client.
+	// TODO: Preferably move this somewhere else in the future.
+	w.Header().Set("Node-Agent", core.USERAGENT)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, string(out))
 }
 
@@ -249,6 +259,10 @@ func (i *jsonAPIHandler) POSTProfile(w http.ResponseWriter, r *http.Request) {
 		ErrorResponse(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	// [djali] internal Djali metadata and tags
+	profile.ProfileType = "djali"
+	profile.MetaTags = make(map[string]string)
+	profile.MetaTags["DjaliVersion"] = core.DJALI_VERSION
 
 	// Save to file
 	err = i.node.UpdateProfile(profile)

@@ -31,10 +31,13 @@ import (
 )
 
 const (
-	// VERSION - current version
+	// VERSION - OpenBazaar Version
 	VERSION = "0.13.3"
+	// DJALI_VERSION - Djali Development Version
+	DJALI_VERSION = "0.0.1-dev"
 	// USERAGENT - user-agent header string
-	USERAGENT = "/openbazaar-go:" + VERSION + "/"
+	// Useragent for Djali Nodes would be "openbazaar-djali-go:0.13.3,0.0.1-dev"
+	USERAGENT = "/openbazaar-djali-go:" + VERSION +","+ DJALI_VERSION + "/"
 )
 
 var log = logging.MustGetLogger("core")
