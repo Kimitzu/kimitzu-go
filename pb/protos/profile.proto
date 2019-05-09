@@ -36,6 +36,37 @@ message Profile {
 
     repeated string currencies             = 18;
 
+    message Background {
+        repeated EducationHistory educationHistory = 1;
+        repeated EmploymentHistory employmentHistory = 2;
+
+        message EducationHistory {
+            string school       = 1;
+            Timespan period     = 2;
+            string degree       = 3;
+            string description  = 4;
+        }
+
+        message EmploymentHistory {
+            string company      = 1;
+            string description  = 2;
+            Location location   = 3;
+            string title        = 4;
+            string role         = 5;
+            Timespan period     = 6;
+        }
+    }
+
+    message Timespan {
+        google.protobuf.Timestamp fr = 1;
+        google.protobuf.Timestamp to = 2;
+    }
+    
+    message Location {
+        string city     = 1;
+        string country  = 2;
+    }
+
     message Contact {
         string website                = 1;
         string email                  = 2;
