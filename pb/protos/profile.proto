@@ -4,6 +4,7 @@ option go_package = "pb";
 
 import "google/protobuf/timestamp.proto";
 import "moderator.proto";
+import "extended_location.proto";
 
 message Profile {
     string peerID                          = 1;
@@ -36,7 +37,10 @@ message Profile {
 
     repeated string currencies             = 18;
 
+    ExtLocation extLocation                = 6660;
     Background background                  = 6661;
+    string profileType                     = 6662;
+    map<string, string> metaTags           = 6663;
 
     message Background {
         repeated EducationHistory educationHistory = 1;
