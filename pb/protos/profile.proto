@@ -36,6 +36,8 @@ message Profile {
 
     repeated string currencies             = 18;
 
+    Background background                  = 6661;
+
     message Background {
         repeated EducationHistory educationHistory = 1;
         repeated EmploymentHistory employmentHistory = 2;
