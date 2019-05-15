@@ -68,19 +68,19 @@ const (
 	PriceModifierMax = 1000.00
 )
 
-type price struct {
+type Price struct {
 	CurrencyCode string  `json:"currencyCode"`
 	Amount       uint64  `json:"amount"`
 	Modifier     float32 `json:"modifier"`
 }
 
-type thumbnail struct {
+type Thumbnail struct {
 	Tiny   string `json:"tiny"`
 	Small  string `json:"small"`
 	Medium string `json:"medium"`
 }
 
-type location struct {
+type Location struct {
 	Latitude   string `json:"latitude"`
 	Longitude  string `json:"longitude"`
 	PlusCode   string `json:"plusCode"`
@@ -101,8 +101,8 @@ type ListingData struct {
 	NSFW               bool      `json:"nsfw"`
 	ContractType       string    `json:"contractType"`
 	Description        string    `json:"description"`
-	Thumbnail          thumbnail `json:"thumbnail"`
-	Price              price     `json:"price"`
+	Thumbnail          Thumbnail `json:"thumbnail"`
+	Price              Price     `json:"price"`
 	ShipsTo            []string  `json:"shipsTo"`
 	FreeShipping       []string  `json:"freeShipping"`
 	Language           string    `json:"language"`
@@ -111,7 +111,7 @@ type ListingData struct {
 	ModeratorIDs       []string  `json:"moderators"`
 	AcceptedCurrencies []string  `json:"acceptedCurrencies"`
 	CoinType           string    `json:"coinType"`
-	Location           location  `json:"location"`
+	Location           Location  `json:"location"`
 }
 
 var (
@@ -524,8 +524,8 @@ func (n *OpenBazaarNode) extractListingData(listing *pb.SignedListing) (ListingD
 		CoinType:     listing.Listing.Metadata.CoinType,
 		ContractType: listing.Listing.Metadata.ContractType.String(),
 		Description:  listing.Listing.Item.Description[:descriptionLength],
-		Thumbnail:    thumbnail{listing.Listing.Item.Images[0].Tiny, listing.Listing.Item.Images[0].Small, listing.Listing.Item.Images[0].Medium},
-		Price: price{
+		Thumbnail:    Thumbnail{listing.Listing.Item.Images[0].Tiny, listing.Listing.Item.Images[0].Small, listing.Listing.Item.Images[0].Medium},
+		Price: Price{
 			CurrencyCode: listing.Listing.Metadata.PricingCurrency,
 			Amount:       listing.Listing.Item.Price,
 			Modifier:     listing.Listing.Metadata.PriceModifier,
@@ -535,7 +535,7 @@ func (n *OpenBazaarNode) extractListingData(listing *pb.SignedListing) (ListingD
 		Language:           listing.Listing.Metadata.Language,
 		ModeratorIDs:       listing.Listing.Moderators,
 		AcceptedCurrencies: listing.Listing.Metadata.AcceptedCurrencies,
-		Location: location{
+		Location: Location{
 			Latitude:   listing.Listing.Location.Latitude,
 			Longitude:  listing.Listing.Location.Longitude,
 			PlusCode:   listing.Listing.Location.PlusCode,
