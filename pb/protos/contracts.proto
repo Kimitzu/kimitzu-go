@@ -1,9 +1,9 @@
 syntax = "proto3";
 option go_package = "pb";
 
-
 import "countrycodes.proto";
 import "google/protobuf/timestamp.proto";
+import "extended_location.proto";
 
 message RicardianContract {
     repeated Listing vendorListings                    = 1;
@@ -30,19 +30,30 @@ message Listing {
     repeated string moderators              = 8;
     string termsAndConditions               = 9;
     string refundPolicy                     = 10;
+    
+    Address location                        = 6661;
 
     message Metadata {
-        uint32 version                     = 1;
-        ContractType contractType          = 2;
-        Format format                      = 3;
-        google.protobuf.Timestamp expiry   = 4;
-        repeated string acceptedCurrencies = 5;
-        string pricingCurrency             = 6;
-        string language                    = 7;
-        uint32 escrowTimeoutHours          = 8;
-        string coinType                    = 9;
-        uint32 coinDivisibility            = 10;
-        float priceModifier                = 11;
+        uint32 version                          = 1;
+        ContractType contractType               = 2;
+        Format format                           = 3;
+        google.protobuf.Timestamp expiry        = 4;
+        repeated string acceptedCurrencies      = 5;
+        string pricingCurrency                  = 6;
+        string language                         = 7;
+        uint32 escrowTimeoutHours               = 8;
+        string coinType                         = 9;
+        uint32 coinDivisibility                 = 10;
+        float priceModifier                     = 11;
+        ServiceRateMethod serviceRateMethod     = 6661;
+        
+        enum ServiceRateMethod {
+            PER_HOUR          = 0;
+            PER_DAY           = 3;
+            PER_MONTH         = 1;
+            PER_MILESTONE     = 4;
+            FIXED             = 5;
+        }
 
         enum ContractType {
             PHYSICAL_GOOD  = 0;
