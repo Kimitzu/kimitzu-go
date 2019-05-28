@@ -41,6 +41,14 @@ message Profile {
     Background background                  = 6661;
     string profileType                     = 6662;
     map<string, string> metaTags           = 6663;
+    Preferences preferences                = 6664;
+
+    message Preferences {
+        string currencyDisplay      = 1;
+        string cryptocurrency       = 2;
+        string language             = 3;
+        string measurementUnit      = 4;
+    }
 
     message Background {
         repeated EducationHistory educationHistory = 1;
