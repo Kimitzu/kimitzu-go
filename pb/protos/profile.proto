@@ -45,9 +45,10 @@ message Profile {
 
     message Preferences {
         string currencyDisplay      = 1;
-        string cryptocurrency       = 2;
-        string language             = 3;
-        string measurementUnit      = 4;
+        string fiat                 = 2;
+        string cryptocurrency       = 3;
+        string language             = 4;
+        string measurementUnit      = 5;
     }
 
     message Background {
