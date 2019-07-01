@@ -45,7 +45,9 @@ message Listing {
         string coinType                         = 9;
         uint32 coinDivisibility                 = 10;
         float priceModifier                     = 11;
+
         ServiceRateMethod serviceRateMethod     = 6661;
+        string serviceClassification               = 6662;
         
         enum ServiceRateMethod {
             PER_HOUR          = 0;
