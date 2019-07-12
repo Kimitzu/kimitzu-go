@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"gx/ipfs/QmUAuYuiafnJRZxDDX7MuruMNsicYNuyub5vUeAcupUBNs/go-ipfs-config"
+	config "gx/ipfs/QmUAuYuiafnJRZxDDX7MuruMNsicYNuyub5vUeAcupUBNs/go-ipfs-config"
 
 	"github.com/OpenBazaar/openbazaar-go/ipfs"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
@@ -201,6 +201,10 @@ func (m *openbazaarSchemaManager) buildIPFSRootDirectories() error {
 		return err
 	}
 	if err := os.MkdirAll(m.DataPathJoin("root", "ratings"), os.ModePerm); err != nil {
+		return err
+	}
+	// Djali buyer ratings
+	if err := os.MkdirAll(m.DataPathJoin("root", "entityratings"), os.ModePerm); err != nil {
 		return err
 	}
 	if err := os.MkdirAll(m.DataPathJoin("root", "images"), os.ModePerm); err != nil {

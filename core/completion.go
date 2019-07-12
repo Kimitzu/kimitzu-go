@@ -65,6 +65,15 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 		return err
 	}
 
+	vofCount := len(contract.VendorOrderFulfillment)
+	bRating := new(pb.EntityRating)
+	hasBuyerRating := false
+	if vofCount != 0 {
+		bRating = contract.VendorOrderFulfillment[vofCount-1].BuyerRating
+		bRating.OrderId = orderID
+		hasBuyerRating = true
+	}
+
 	oc := new(pb.OrderCompletion)
 	oc.OrderId = orderID
 	oc.Ratings = []*pb.Rating{}
@@ -106,6 +115,9 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 			for _, fulfillment := range contract.VendorOrderFulfillment {
 				if fulfillment.RatingSignature.Metadata.ListingSlug == r.Slug {
 					rs = fulfillment.RatingSignature
+					if hasBuyerRating {
+						bRating.Slug = r.Slug
+					}
 					break
 				}
 			}
@@ -260,6 +272,13 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	if err != nil {
 		return err
 	}
+	if hasBuyerRating {
+		err = n.addBuyerRating(bRating)
+		if err != nil {
+			return err
+		}
+	}
+
 	contract.BuyerOrderCompletion = oc
 	for _, sig := range rc.Signatures {
 		if sig.Section == pb.Signature_ORDER_COMPLETION {
@@ -500,6 +519,33 @@ func (n *OpenBazaarNode) ValidateAndSaveRating(contract *pb.RicardianContract) (
 		}
 	}
 	return retErr
+}
+
+func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
+	ratingPath := path.Join(n.RepoPath, "root", "entityratings", rating.OrderId+".json")
+
+	_, err := ipfs.GetHashOfFile(n.IpfsNode, ratingPath)
+	if err != nil {
+		return err
+	}
+
+	// Create rating file
+	f, err := os.Create(ratingPath)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	j, jerr := json.MarshalIndent(rating, "", "    ")
+	if jerr != nil {
+		return jerr
+	}
+	_, werr := f.Write(j)
+	if werr != nil {
+		return werr
+	}
+
+	return nil
 }
 
 func (n *OpenBazaarNode) updateRatingIndex(rating *pb.Rating, ratingPath string) error {

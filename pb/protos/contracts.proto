@@ -276,6 +276,8 @@ message OrderFulfillment {
     // Cryptocurrencies only
     repeated CryptocurrencyDelivery cryptocurrencyDelivery = 9;
 
+    EntityRating buyerRating              = 6660;
+
     message PhysicalDelivery {
         string shipper            = 1;
         string trackingNumber     = 2;
@@ -294,6 +296,27 @@ message OrderFulfillment {
         repeated BitcoinSignature sigs = 1;
         string payoutAddress           = 2;
         uint64 payoutFeePerByte        = 3;
+    }
+}
+
+message EntityRating {
+    string comment               = 1;
+    string slug                  = 2;
+    string orderId               = 3;
+    repeated RatingFields fields = 4;
+
+    message RatingFields {
+        RatingType type = 1;
+        uint64 score    = 2;
+        uint64 max      = 3;
+        uint64 weight   = 4;
+
+        enum RatingType {
+            OUTSIDE_WORK_COMP = 0;
+            READ_LISTING      = 1;
+            SCOPE_ACCURATE    = 2;
+            FAST_RESPONSE     = 3;
+        }
     }
 }
 
