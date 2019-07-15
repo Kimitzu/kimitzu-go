@@ -3423,14 +3423,26 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 		slug = ""
 	}
 
+	buyerRatings := pb.EntityRatingStore{}
+
 	var indexBytes []byte
-	if peerID != i.node.IPFSIdentityString() {
+	var buyerRatingBytes []byte
+	if peerID != i.node.IPFSIdentityString() && peerID != "ob" {
 		indexBytes, _ = ipfs.ResolveThenCat(i.node.IpfsNode, ipnspath.FromString(path.Join(peerID, "ratings.json")), time.Minute, i.node.IPNSQuorumSize, useCache)
+		buyerRatingBytes, _ = ipfs.ResolveThenCat(i.node.IpfsNode, ipnspath.FromString(path.Join(peerID, "entityratings", "buyer.json")), time.Minute, i.node.IPNSQuorumSize, useCache)
 	} else {
 		indexBytes, _ = ioutil.ReadFile(path.Join(i.node.RepoPath, "root", "ratings.json"))
+		buyerRatingBytes, _ = ioutil.ReadFile(path.Join(i.node.RepoPath, "root", "entityratings", "buyer.json"))
+	}
+	if buyerRatingBytes != nil {
+		jsonpb.UnmarshalString(string(buyerRatingBytes), &buyerRatings)
+		//json.Unmarshal(buyerRatingBytes, &buyerRatings)
 	}
 	if indexBytes == nil {
+		djaliresp := core.DjaliRatingResp{}
+		djaliresp.BuyerRatings = buyerRatings.Ratings
 		rating := new(core.SavedRating)
+		rating.Djali = djaliresp
 		rating.Ratings = []string{}
 		ret, err := json.MarshalIndent(rating, "", "    ")
 		if err != nil {
@@ -3449,7 +3461,11 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if slug != "" {
+		// Other peer ID Rating
+		djaliresp := core.DjaliRatingResp{}
+		djaliresp.BuyerRatings = buyerRatings.Ratings
 		rating := new(core.SavedRating)
+		rating.Djali = djaliresp
 		for _, r := range ratingList {
 			if r.Slug == slug {
 				rating = &r

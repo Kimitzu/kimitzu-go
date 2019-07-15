@@ -49,12 +49,18 @@ type RatingData struct {
 	Anonymous       bool   `json:"anonymous"`
 }
 
+// DjaliRatingResp - additional ratings
+type DjaliRatingResp struct {
+	BuyerRatings []*pb.EntityRating `json:"buyerRatings"`
+}
+
 // SavedRating - represent saved rating
 type SavedRating struct {
-	Slug    string   `json:"slug"`
-	Count   int      `json:"count"`
-	Average float32  `json:"average"`
-	Ratings []string `json:"ratings"`
+	Slug    string          `json:"slug"`
+	Count   int             `json:"count"`
+	Average float32         `json:"average"`
+	Ratings []string        `json:"ratings"`
+	Djali   DjaliRatingResp `json:"djali"`
 }
 
 // CompleteOrder - complete the order
@@ -522,21 +528,41 @@ func (n *OpenBazaarNode) ValidateAndSaveRating(contract *pb.RicardianContract) (
 }
 
 func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
-	ratingPath := path.Join(n.RepoPath, "root", "entityratings", rating.OrderId+".json")
+	ratingPath := path.Join(n.RepoPath, "root", "entityratings", "buyer.json")
 
 	_, err := ipfs.GetHashOfFile(n.IpfsNode, ratingPath)
 	if err != nil {
 		return err
 	}
 
-	// Create rating file
-	f, err := os.Create(ratingPath)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
+	ratings := pb.EntityRatingStore{}
+	var f *os.File
 
-	j, jerr := json.MarshalIndent(rating, "", "    ")
+	_, ferr := os.Stat(ratingPath)
+	if !os.IsNotExist(ferr) {
+		// Read existing file
+		xratingbytes, err := ioutil.ReadFile(ratingPath)
+		if err != nil {
+			return err
+		}
+		jsonpb.UnmarshalString(string(xratingbytes), &ratings)
+		f, err := os.Open(ratingPath)
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+
+	} else {
+		f, err := os.Create(ratingPath)
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+	}
+
+	ratings.Ratings = append(ratings.Ratings, rating)
+
+	j, jerr := json.MarshalIndent(ratings, "", "    ")
 	if jerr != nil {
 		return jerr
 	}
