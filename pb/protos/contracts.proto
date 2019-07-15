@@ -299,6 +299,11 @@ message OrderFulfillment {
     }
 }
 
+message EntityRatingStore {
+    string type = 1;
+    repeated EntityRating ratings = 2;
+}
+
 message EntityRating {
     string comment               = 1;
     string slug                  = 2;
