@@ -534,6 +534,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 
 	_, err := ipfs.GetHashOfFile(n.IpfsNode, ratingPath)
 	if err != nil {
+		fmt.Println("IPFS Error")
 		return err
 	}
 
@@ -545,11 +546,13 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 		// Read existing file
 		xratingbytes, err := ioutil.ReadFile(ratingPath)
 		if err != nil {
+			fmt.Println("File Read Error")
 			return err
 		}
 		jsonpb.UnmarshalString(string(xratingbytes), &ratings)
 		f, err := os.Open(ratingPath)
 		if err != nil {
+			fmt.Println("File Open Error")
 			return err
 		}
 		defer f.Close()
@@ -557,6 +560,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 	} else {
 		f, err := os.Create(ratingPath)
 		if err != nil {
+			fmt.Println("File Create Error")
 			return err
 		}
 		defer f.Close()
