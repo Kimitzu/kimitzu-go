@@ -536,6 +536,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 
 	ratings := pb.EntityRatingStore{}
 	var f *os.File
+	var err error
 
 	_, ferr := os.Stat(ratingPath)
 	if !os.IsNotExist(ferr) {
@@ -554,20 +555,21 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 		defer f.Close()
 
 	} else {
-		f, err := os.Create(ratingPath)
+		f, err = os.Create(ratingPath)
 		if err != nil {
 			fmt.Println("File Create Error")
 			return err
 		}
 		// Close the file and publish to IPFS
-		defer func() {
-			f.Close()
-			_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
-			if err != nil {
-				fmt.Println("IPFS Publish Error")
-			}
-		}()
 	}
+
+	defer func() {
+		f.Close()
+		_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
+		if err != nil {
+			fmt.Println("IPFS Publish Error")
+		}
+	}()
 
 	ratings.Ratings = append(ratings.Ratings, rating)
 
