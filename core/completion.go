@@ -547,7 +547,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 			return err
 		}
 		jsonpb.UnmarshalString(string(xratingbytes), &ratings)
-		f, err := os.Open(ratingPath)
+		f, err = os.Open(ratingPath)
 		if err != nil {
 			fmt.Println("File Open Error")
 			return err
