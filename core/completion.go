@@ -583,6 +583,7 @@ func (n *OpenBazaarNode) updateRatingIndex(rating *pb.Rating, ratingPath string)
 
 	ratingHash, err := ipfs.GetHashOfFile(n.IpfsNode, ratingPath)
 	if err != nil {
+		fmt.Println("IPFS Error", err)
 		return err
 	}
 
@@ -591,6 +592,7 @@ func (n *OpenBazaarNode) updateRatingIndex(rating *pb.Rating, ratingPath string)
 		// Read existing file
 		file, err := ioutil.ReadFile(indexPath)
 		if err != nil {
+			fmt.Println("File Read Error", err)
 			return err
 		}
 		err = json.Unmarshal(file, &index)
