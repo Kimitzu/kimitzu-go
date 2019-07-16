@@ -562,7 +562,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 			f.Close()
 			_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
 			if err != nil {
-				log.Println("IPFS Publish Error")
+				fmt.Println("IPFS Publish Error")
 			}
 		}()
 	}
