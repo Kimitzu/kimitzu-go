@@ -32,7 +32,7 @@ import (
 
 const (
 	// VERSION - OpenBazaar Version
-	VERSION = "0.13.3"
+	VERSION = "0.13.4"
 	// DJALI_VERSION - Djali Development Version
 	DJALI_VERSION = "0.0.1-dev"
 	// USERAGENT - user-agent header string
