@@ -68,6 +68,7 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 
 	orderID, err := n.CalcOrderID(contract.BuyerOrder)
 	if err != nil {
+		fmt.Println("Djali error:", err)
 		return err
 	}
 
