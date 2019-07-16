@@ -564,7 +564,6 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 	}
 
 	defer func() {
-		f.Close()
 		_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
 		if err != nil {
 			fmt.Println("IPFS Publish Error")
@@ -575,13 +574,16 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 
 	j, jerr := json.MarshalIndent(ratings, "", "    ")
 	if jerr != nil {
+		f.Close()
 		return jerr
 	}
 	_, werr := f.Write(j)
 	if werr != nil {
+		f.Close()
 		return werr
 	}
 
+	f.Close()
 	return nil
 }
 
