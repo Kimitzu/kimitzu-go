@@ -552,7 +552,6 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 			fmt.Println("File Open Error")
 			return err
 		}
-		defer f.Close()
 
 	} else {
 		f, err = os.Create(ratingPath)
