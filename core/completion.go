@@ -532,12 +532,6 @@ func (n *OpenBazaarNode) ValidateAndSaveRating(contract *pb.RicardianContract) (
 func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 	ratingPath := path.Join(n.RepoPath, "root", "entityratings", "buyer.json")
 
-	_, err := ipfs.GetHashOfFile(n.IpfsNode, ratingPath)
-	if err != nil {
-		fmt.Println("IPFS Error")
-		return err
-	}
-
 	ratings := pb.EntityRatingStore{}
 	var f *os.File
 
@@ -563,7 +557,14 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 			fmt.Println("File Create Error")
 			return err
 		}
-		defer f.Close()
+		// Close the file and publish to IPFS
+		defer func() {
+			f.Close()
+			_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
+			if err != nil {
+				log.Println("IPFS Publish Error")
+			}
+		}()
 	}
 
 	ratings.Ratings = append(ratings.Ratings, rating)
