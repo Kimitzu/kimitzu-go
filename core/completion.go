@@ -49,12 +49,18 @@ type RatingData struct {
 	Anonymous       bool   `json:"anonymous"`
 }
 
+// DjaliRatingResp - additional ratings
+type DjaliRatingResp struct {
+	BuyerRatings []*pb.EntityRating `json:"buyerRatings"`
+}
+
 // SavedRating - represent saved rating
 type SavedRating struct {
-	Slug    string   `json:"slug"`
-	Count   int      `json:"count"`
-	Average float32  `json:"average"`
-	Ratings []string `json:"ratings"`
+	Slug    string          `json:"slug"`
+	Count   int             `json:"count"`
+	Average float32         `json:"average"`
+	Ratings []string        `json:"ratings"`
+	Djali   DjaliRatingResp `json:"djali"`
 }
 
 // CompleteOrder - complete the order
@@ -63,6 +69,17 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	orderID, err := n.CalcOrderID(contract.BuyerOrder)
 	if err != nil {
 		return err
+	}
+
+	vofCount := len(contract.VendorOrderFulfillment)
+	bRating := new(pb.EntityRating)
+	hasBuyerRating := false
+	if vofCount != 0 {
+		bRating = contract.VendorOrderFulfillment[vofCount-1].BuyerRating
+		if bRating != nil {
+			bRating.OrderId = orderID
+			hasBuyerRating = true
+		}
 	}
 
 	oc := new(pb.OrderCompletion)
@@ -106,6 +123,9 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 			for _, fulfillment := range contract.VendorOrderFulfillment {
 				if fulfillment.RatingSignature.Metadata.ListingSlug == r.Slug {
 					rs = fulfillment.RatingSignature
+					if hasBuyerRating {
+						bRating.Slug = r.Slug
+					}
 					break
 				}
 			}
@@ -260,6 +280,14 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	if err != nil {
 		return err
 	}
+	if hasBuyerRating {
+		err = n.addBuyerRating(bRating)
+		if err != nil {
+			fmt.Println("Buyer rating error!")
+			return err
+		}
+	}
+
 	contract.BuyerOrderCompletion = oc
 	for _, sig := range rc.Signatures {
 		if sig.Section == pb.Signature_ORDER_COMPLETION {
@@ -268,6 +296,7 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	}
 	err = n.Datastore.Purchases().Put(orderID, *contract, pb.OrderState_COMPLETED, true)
 	if err != nil {
+		fmt.Println("Failed to put putchases in datastore")
 		return err
 	}
 
@@ -502,6 +531,61 @@ func (n *OpenBazaarNode) ValidateAndSaveRating(contract *pb.RicardianContract) (
 	return retErr
 }
 
+func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
+	ratingPath := path.Join(n.RepoPath, "root", "entityratings", "buyer.json")
+
+	ratings := pb.EntityRatingStore{}
+	var f *os.File
+	var err error
+
+	_, ferr := os.Stat(ratingPath)
+	if !os.IsNotExist(ferr) {
+		// Read existing file
+		xratingbytes, err := ioutil.ReadFile(ratingPath)
+		if err != nil {
+			fmt.Println("File Read Error")
+			return err
+		}
+		jsonpb.UnmarshalString(string(xratingbytes), &ratings)
+		f, err = os.OpenFile(ratingPath, os.O_WRONLY, os.ModePerm)
+		if err != nil {
+			fmt.Println("File Open Error")
+			return err
+		}
+
+	} else {
+		f, err = os.Create(ratingPath)
+		if err != nil {
+			fmt.Println("File Create Error")
+			return err
+		}
+		// Close the file and publish to IPFS
+	}
+
+	defer func() {
+		_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
+		if err != nil {
+			fmt.Println("IPFS Publish Error")
+		}
+	}()
+
+	ratings.Ratings = append(ratings.Ratings, rating)
+
+	j, jerr := json.MarshalIndent(ratings, "", "    ")
+	if jerr != nil {
+		f.Close()
+		return jerr
+	}
+	_, werr := f.Write(j)
+	if werr != nil {
+		f.Close()
+		return werr
+	}
+
+	f.Close()
+	return nil
+}
+
 func (n *OpenBazaarNode) updateRatingIndex(rating *pb.Rating, ratingPath string) error {
 	indexPath := path.Join(n.RepoPath, "root", "ratings.json")
 
@@ -509,6 +593,7 @@ func (n *OpenBazaarNode) updateRatingIndex(rating *pb.Rating, ratingPath string)
 
 	ratingHash, err := ipfs.GetHashOfFile(n.IpfsNode, ratingPath)
 	if err != nil {
+		fmt.Println("IPFS Error", err)
 		return err
 	}
 
@@ -517,6 +602,7 @@ func (n *OpenBazaarNode) updateRatingIndex(rating *pb.Rating, ratingPath string)
 		// Read existing file
 		file, err := ioutil.ReadFile(indexPath)
 		if err != nil {
+			fmt.Println("File Read Error", err)
 			return err
 		}
 		err = json.Unmarshal(file, &index)

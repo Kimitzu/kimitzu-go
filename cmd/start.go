@@ -98,7 +98,7 @@ type Start struct {
 }
 
 func (x *Start) Execute(args []string) error {
-	printSplashScreen(x.Verbose)
+	printSplashScreen(x.Verbose, x.Testnet)
 	ipfs.UpdateIPFSGlobalProtocolVars(x.Testnet || x.Regtest)
 
 	if x.Testnet && x.Regtest {
@@ -936,7 +936,7 @@ func InitializeRepo(dataDir, password, mnemonic string, testnet bool, creationDa
 	return sqliteDB, nil
 }
 
-func printSplashScreen(verbose bool) {
+func printSplashScreen(verbose bool, testnet bool) {
 	red := color.New(color.FgRed)
 	white := color.New(color.FgWhite)
 
@@ -969,7 +969,10 @@ func printSplashScreen(verbose bool) {
 	red.DisableColor()
 	white.DisableColor()
 	fmt.Println("")
-	fmt.Println("Djali(OpenBazaar) Server v" + core.VERSION)
+	if testnet {
+		fmt.Println("Running in Testnet")
+	}
+	fmt.Println("Djali(OpenBazaar) Server v." + core.VERSION)
 	if !verbose {
 		fmt.Println("[Press Ctrl+C to exit]")
 	}
