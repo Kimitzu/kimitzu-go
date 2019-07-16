@@ -68,7 +68,6 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 
 	orderID, err := n.CalcOrderID(contract.BuyerOrder)
 	if err != nil {
-		fmt.Println("Djali error:", err)
 		return err
 	}
 
@@ -77,8 +76,10 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	hasBuyerRating := false
 	if vofCount != 0 {
 		bRating = contract.VendorOrderFulfillment[vofCount-1].BuyerRating
-		bRating.OrderId = orderID
-		hasBuyerRating = true
+		if bRating != nil {
+			bRating.OrderId = orderID
+			hasBuyerRating = true
+		}
 	}
 
 	oc := new(pb.OrderCompletion)
