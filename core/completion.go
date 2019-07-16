@@ -283,6 +283,7 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	if hasBuyerRating {
 		err = n.addBuyerRating(bRating)
 		if err != nil {
+			fmt.Println("Buyer rating error!")
 			return err
 		}
 	}
@@ -295,6 +296,7 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	}
 	err = n.Datastore.Purchases().Put(orderID, *contract, pb.OrderState_COMPLETED, true)
 	if err != nil {
+		fmt.Println("Failed to put putchases in datastore")
 		return err
 	}
 
