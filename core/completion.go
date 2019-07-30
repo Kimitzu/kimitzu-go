@@ -535,6 +535,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 	ratingPath := path.Join(n.RepoPath, "root", "entityratings", "buyer.json")
 
 	ratings := pb.EntityRatingStore{}
+	newStore := false
 	var f *os.File
 	var err error
 
@@ -559,13 +560,16 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 			fmt.Println("File Create Error")
 			return err
 		}
+		newStore = true
 		// Close the file and publish to IPFS
 	}
 
 	defer func() {
-		_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
-		if err != nil {
-			fmt.Println("IPFS Publish Error")
+		if newStore {
+			_, err := ipfs.AddFile(n.IpfsNode, ratingPath)
+			if err != nil {
+				fmt.Println("IPFS Publish Error")
+			}
 		}
 	}()
 
@@ -583,6 +587,12 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 	}
 
 	f.Close()
+
+	err = n.SeedNode()
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
