@@ -4,8 +4,8 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/OpenBazaar/openbazaar-go/core"
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/core"
+	"github.com/djali-foundation/djali-go/schema"
 	"github.com/ipfs/go-ipfs/core/corehttp"
 	"github.com/op/go-logging"
 )
@@ -32,6 +32,7 @@ func NewGateway(n *core.OpenBazaarNode, authCookie http.Cookie, l net.Listener, 
 	topMux.Handle("/ob/", jsonAPI)
 	topMux.Handle("/wallet/", jsonAPI)
 	topMux.Handle("/ws", wsAPI)
+	topMux.HandleFunc("/djali/info", DjaliInfo(jsonAPI.node, authCookie, config))
 
 	var (
 		err error

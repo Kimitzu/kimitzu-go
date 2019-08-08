@@ -9,8 +9,8 @@ import (
 	"path"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/OpenBazaar/openbazaar-go/ipfs"
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/ipfs"
+	"github.com/djali-foundation/djali-go/pb"
 	"github.com/golang/protobuf/proto"
 	ipfscore "github.com/ipfs/go-ipfs/core"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"

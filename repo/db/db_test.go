@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/schema"
 	"github.com/OpenBazaar/wallet-interface"
 )
 

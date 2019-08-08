@@ -8,7 +8,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/OpenBazaar/openbazaar-go/ipfs"
+	"github.com/djali-foundation/djali-go/ipfs"
 	"github.com/golang/protobuf/ptypes/timestamp"
 
 	crypto "gx/ipfs/QmTW4SdgBWq9GjsBsHeUx8WuGxzhgzAf88UMH2w62PC8yK/go-libp2p-crypto"
@@ -22,8 +22,8 @@ import (
 	ipfspath "gx/ipfs/QmQAgv6Gaoe2tQpcabqwKXKChp2MZ7i3UXv9DqTTaxCaTR/go-path"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/OpenBazaar/openbazaar-go/pb"
-	"github.com/OpenBazaar/openbazaar-go/repo"
+	"github.com/djali-foundation/djali-go/pb"
+	"github.com/djali-foundation/djali-go/repo"
 	"github.com/OpenBazaar/wallet-interface"
 	hd "github.com/btcsuite/btcutil/hdkeychain"
 	"github.com/golang/protobuf/proto"

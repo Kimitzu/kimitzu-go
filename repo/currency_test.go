@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/OpenBazaar/openbazaar-go/repo"
-	"github.com/OpenBazaar/openbazaar-go/test/factory"
+	"github.com/djali-foundation/djali-go/repo"
+	"github.com/djali-foundation/djali-go/test/factory"
 )
 
 func mustNewCurrencyValue(t *testing.T, amount, currencyCode string) *repo.CurrencyValue {

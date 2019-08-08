@@ -5,9 +5,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/OpenBazaar/openbazaar-go/repo"
-	"github.com/OpenBazaar/openbazaar-go/repo/db"
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/repo"
+	"github.com/djali-foundation/djali-go/repo/db"
+	"github.com/djali-foundation/djali-go/schema"
 )
 
 func buildNewModeratedStore() (repo.ModeratedStore, func(), error) {

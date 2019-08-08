@@ -6,8 +6,8 @@ import (
 	peer "gx/ipfs/QmYVXrKrKHDC9FobgmcmshCDyWwdrfwfanNQN4oxJ9Fk3h/go-libp2p-peer"
 	"time"
 
-	"github.com/OpenBazaar/openbazaar-go/ipfs"
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/ipfs"
+	"github.com/djali-foundation/djali-go/pb"
 	"github.com/OpenBazaar/wallet-interface"
 	btc "github.com/btcsuite/btcutil"
 )

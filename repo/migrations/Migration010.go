@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/pb"
 	_ "github.com/mutecomm/go-sqlcipher"
 )
 

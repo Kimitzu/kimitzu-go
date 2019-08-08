@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	obnet "github.com/OpenBazaar/openbazaar-go/net"
-	"github.com/OpenBazaar/openbazaar-go/repo"
-	"github.com/OpenBazaar/openbazaar-go/repo/db"
+	obnet "github.com/djali-foundation/djali-go/net"
+	"github.com/djali-foundation/djali-go/repo"
+	"github.com/djali-foundation/djali-go/repo/db"
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 )

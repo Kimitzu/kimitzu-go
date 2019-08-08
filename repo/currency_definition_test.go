@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/OpenBazaar/openbazaar-go/repo"
-	"github.com/OpenBazaar/openbazaar-go/test/factory"
+	"github.com/djali-foundation/djali-go/repo"
+	"github.com/djali-foundation/djali-go/test/factory"
 )
 
 func TestCurrencyDefinitionsAreEqual(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"sync"
 
-	"github.com/OpenBazaar/openbazaar-go/repo"
+	"github.com/djali-foundation/djali-go/repo"
 	"github.com/OpenBazaar/wallet-interface"
 )
 

@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/OpenBazaar/openbazaar-go/repo/migrations"
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/repo/migrations"
+	"github.com/djali-foundation/djali-go/schema"
 )
 
 func TestMigration007(t *testing.T) {

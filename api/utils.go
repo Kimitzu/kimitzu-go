@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/pb"
 )
 
 type TransactionQuery struct {

@@ -15,7 +15,7 @@ import (
 
 	config "gx/ipfs/QmUAuYuiafnJRZxDDX7MuruMNsicYNuyub5vUeAcupUBNs/go-ipfs-config"
 
-	"github.com/OpenBazaar/openbazaar-go/ipfs"
+	"github.com/djali-foundation/djali-go/ipfs"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	_ "github.com/mutecomm/go-sqlcipher"
 	"github.com/tyler-smith/go-bip39"

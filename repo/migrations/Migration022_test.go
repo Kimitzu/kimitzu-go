@@ -1,8 +1,8 @@
 package migrations_test
 
 import (
-	"github.com/OpenBazaar/openbazaar-go/repo/migrations"
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/repo/migrations"
+	"github.com/djali-foundation/djali-go/schema"
 	"io/ioutil"
 	"os"
 	"regexp"

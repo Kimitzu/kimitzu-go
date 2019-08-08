@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/schema"
 )
 
 // NewAPIConfig returns a new config object for the API tests

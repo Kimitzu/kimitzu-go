@@ -9,14 +9,14 @@ import (
 	"io/ioutil"
 	"path"
 
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/schema"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 
 	"os"
 	"strings"
 	"syscall"
 
-	"github.com/OpenBazaar/openbazaar-go/repo"
+	"github.com/djali-foundation/djali-go/repo"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

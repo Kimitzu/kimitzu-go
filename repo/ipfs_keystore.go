@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/OpenBazaar/openbazaar-go/ipfs"
+	"github.com/djali-foundation/djali-go/ipfs"
 	"github.com/ipfs/go-ipfs/core"
 )
 

@@ -14,10 +14,10 @@ import (
 
 	"gx/ipfs/QmddjPSGZb3ieihSseFeCfVRpZzcqczPNsD2DvarSwnjJB/gogo-protobuf/proto"
 
-	"github.com/OpenBazaar/openbazaar-go/ipfs"
-	"github.com/OpenBazaar/openbazaar-go/repo/migrations"
-	dhtpb "github.com/OpenBazaar/openbazaar-go/repo/migrations/helpers/Migration020"
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/ipfs"
+	"github.com/djali-foundation/djali-go/repo/migrations"
+	dhtpb "github.com/djali-foundation/djali-go/repo/migrations/helpers/Migration020"
+	"github.com/djali-foundation/djali-go/schema"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 )
 

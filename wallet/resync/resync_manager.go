@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/multiwallet"
-	"github.com/OpenBazaar/openbazaar-go/repo"
+	"github.com/djali-foundation/djali-go/repo"
 	"github.com/op/go-logging"
 )
 

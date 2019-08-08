@@ -1,6 +1,6 @@
 package factory
 
-import "github.com/OpenBazaar/openbazaar-go/pb"
+import "github.com/djali-foundation/djali-go/pb"
 
 func NewImage() *pb.Listing_Item_Image {
 	return &pb.Listing_Item_Image{

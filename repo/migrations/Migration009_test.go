@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/OpenBazaar/openbazaar-go/repo/migrations"
-	"github.com/OpenBazaar/openbazaar-go/test/factory"
+	"github.com/djali-foundation/djali-go/repo/migrations"
+	"github.com/djali-foundation/djali-go/test/factory"
 )
 
 const testMigration009Password = "letmein"

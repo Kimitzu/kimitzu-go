@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/pb"
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"

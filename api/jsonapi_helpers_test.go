@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/OpenBazaar/openbazaar-go/test"
+	"github.com/djali-foundation/djali-go/test"
 	"github.com/golang/protobuf/proto"
 	"github.com/op/go-logging"
 )

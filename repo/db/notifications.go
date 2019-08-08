@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/OpenBazaar/openbazaar-go/repo"
+	"github.com/djali-foundation/djali-go/repo"
 )
 
 type NotficationsDB struct {

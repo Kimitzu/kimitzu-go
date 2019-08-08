@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/OpenBazaar/openbazaar-go/core"
+	"github.com/djali-foundation/djali-go/core"
 	"github.com/ipfs/go-ipfs/core/mock"
 )
 

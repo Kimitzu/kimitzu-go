@@ -3,7 +3,7 @@ package api
 import (
 	"fmt"
 
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/pb"
 )
 
 const notFoundJSON = `{"success": false,"reason": "Not Found"}`

@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/OpenBazaar/openbazaar-go/core"
-	"github.com/OpenBazaar/openbazaar-go/schema"
+	"github.com/djali-foundation/djali-go/core"
+	"github.com/djali-foundation/djali-go/schema"
 	"github.com/gorilla/websocket"
 	"github.com/op/go-logging"
 )

@@ -31,15 +31,15 @@ import (
 	mh "gx/ipfs/QmerPMzPk1mJVowm8KgmoknWa4yCYvvugMPsgWmDNUvDLW/go-multihash"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/OpenBazaar/openbazaar-go/core"
-	"github.com/OpenBazaar/openbazaar-go/ipfs"
-	"github.com/OpenBazaar/openbazaar-go/pb"
-	"github.com/OpenBazaar/openbazaar-go/repo"
-	"github.com/OpenBazaar/openbazaar-go/schema"
 	"github.com/OpenBazaar/spvwallet"
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcutil/base58"
+	"github.com/djali-foundation/djali-go/core"
+	"github.com/djali-foundation/djali-go/ipfs"
+	"github.com/djali-foundation/djali-go/pb"
+	"github.com/djali-foundation/djali-go/repo"
+	"github.com/djali-foundation/djali-go/schema"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/ipfs/go-ipfs/core/coreapi"
@@ -113,7 +113,8 @@ func (i *jsonAPIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.Header()[k] = v.([]string)
 	}
 
-	if i.config.Authenticated {
+	// Modified to skip authentication for local requests
+	if i.config.Authenticated && !strings.HasPrefix(r.RemoteAddr, "127.0.0.1") {
 		if i.config.Username == "" || i.config.Password == "" {
 			cookie, err := r.Cookie("OpenBazaar_Auth_Cookie")
 			if err != nil {
@@ -138,6 +139,7 @@ func (i *jsonAPIHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			h := sha256.Sum256([]byte(password))
 			password = hex.EncodeToString(h[:])
 			if !ok || username != i.config.Username || !strings.EqualFold(password, i.config.Password) {
+				fmt.Println("Invalid authentication", i.config.Username, i.config.Password, username, password)
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprint(w, "403 - Forbidden")
 				return

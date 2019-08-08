@@ -6,8 +6,8 @@ import (
 	"os/signal"
 	"path/filepath"
 
-	"github.com/OpenBazaar/openbazaar-go/cmd"
-	"github.com/OpenBazaar/openbazaar-go/core"
+	"github.com/djali-foundation/djali-go/cmd"
+	"github.com/djali-foundation/djali-go/core"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"github.com/jessevdk/go-flags"
 	"github.com/op/go-logging"

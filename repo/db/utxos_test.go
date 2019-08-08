@@ -7,9 +7,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/OpenBazaar/openbazaar-go/repo"
-	"github.com/OpenBazaar/openbazaar-go/schema"
-	"github.com/OpenBazaar/openbazaar-go/test/factory"
+	"github.com/djali-foundation/djali-go/repo"
+	"github.com/djali-foundation/djali-go/schema"
+	"github.com/djali-foundation/djali-go/test/factory"
 	"github.com/OpenBazaar/wallet-interface"
 )
 

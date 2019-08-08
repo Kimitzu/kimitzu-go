@@ -3,7 +3,7 @@ package net
 import (
 	"testing"
 
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/pb"
 )
 
 // TestEnsureNoOmissionsInMessageProcessingOrder ensures that

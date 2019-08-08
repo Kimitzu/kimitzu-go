@@ -6,8 +6,8 @@ import (
 	"net/smtp"
 	"strings"
 
-	"github.com/OpenBazaar/openbazaar-go/core"
-	"github.com/OpenBazaar/openbazaar-go/repo"
+	"github.com/djali-foundation/djali-go/core"
+	"github.com/djali-foundation/djali-go/repo"
 )
 
 // Notification manager intercepts data form 'inChan' which is embedded

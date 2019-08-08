@@ -13,7 +13,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/OpenBazaar/openbazaar-go/pb"
+	"github.com/djali-foundation/djali-go/pb"
 	"github.com/btcsuite/btcd/btcec"
 	"github.com/golang/protobuf/proto"
 )
