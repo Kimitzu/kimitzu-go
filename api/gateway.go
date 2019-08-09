@@ -32,7 +32,9 @@ func NewGateway(n *core.OpenBazaarNode, authCookie http.Cookie, l net.Listener, 
 	topMux.Handle("/ob/", jsonAPI)
 	topMux.Handle("/wallet/", jsonAPI)
 	topMux.Handle("/ws", wsAPI)
-	topMux.HandleFunc("/djali/info", DjaliInfo(jsonAPI.node, authCookie, config))
+
+	topMux.HandleFunc("/djali/info", DjaliInfo(n, authCookie, config))
+	topMux.HandleFunc("/djali/config", DjaliConfig(n, authCookie, config))
 
 	var (
 		err error
