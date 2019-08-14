@@ -94,7 +94,7 @@ func newWSAPIHandler(node *core.OpenBazaarNode, authCookie http.Cookie, config s
 func (wsh wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if !wsh.enabled {
 		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprint(w, "403 - Forbidden")
+		fmt.Fprint(w, "403 - Forbidden - Not Enabled")
 		return
 	}
 	if len(wsh.allowedIPs) > 0 {
@@ -102,7 +102,7 @@ func (wsh wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if !wsh.allowedIPs[remoteAddr[0]] {
 			wsh.logger.Errorf("refused websocket connection from ip: %s", remoteAddr[0])
 			w.WriteHeader(http.StatusForbidden)
-			fmt.Fprint(w, "403 - Forbidden")
+			fmt.Fprint(w, "403 - Forbidden - Refused Connection")
 			return
 		}
 	}
@@ -112,23 +112,23 @@ func (wsh wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				wsh.logger.Error("refused websocket connection: no cookie present")
 				w.WriteHeader(http.StatusForbidden)
-				fmt.Fprint(w, "403 - Forbidden")
+				fmt.Fprint(w, "403 - Forbidden - No cookie present")
 				return
 			}
 			if wsh.cookie.Value != cookie.Value {
 				wsh.logger.Error("refused websocket connection: invalid cookie")
 				w.WriteHeader(http.StatusForbidden)
-				fmt.Fprint(w, "403 - Forbidden")
+				fmt.Fprint(w, "403 - Forbidden - Invalid Cookie")
 				return
 			}
 		} else {
-			username, password, ok := r.BasicAuth()
+			username, pasword, ok := r.BasicAuth()
 			h := sha256.Sum256([]byte(password))
 			password = hex.EncodeToString(h[:])
 			if !ok || username != wsh.username || !strings.EqualFold(password, wsh.password) {
 				wsh.logger.Error("refused websocket connection: invalid username and/or password")
 				w.WriteHeader(http.StatusForbidden)
-				fmt.Fprint(w, "403 - Forbidden")
+				fmt.Fprint(w, "403 - Forbidden - Invalid Credentials")
 				return
 			}
 		}
