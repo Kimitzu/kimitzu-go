@@ -130,10 +130,11 @@ func DjaliConfig(node *core.OpenBazaarNode, cookie http.Cookie, config schema.AP
 		}
 
 		fmt.Fprintf(w,
-			`{"repoPath": "%v", "cookie": "%v", "username": "%v"}`,
+			`{"repoPath": "%v", "cookie": "%v", "username": "%v", "authenticated": %v}`,
 			strings.ReplaceAll(node.RepoPath, "\\", "\\\\"),
 			cookie.String(),
-			newConfig.Username)
+			newConfig.Username,
+			config.Authenticated)
 		return
 	}
 
