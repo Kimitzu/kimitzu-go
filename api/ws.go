@@ -122,7 +122,7 @@ func (wsh wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		} else {
-			username, pasword, ok := r.BasicAuth()
+			username, password, ok := r.BasicAuth()
 			h := sha256.Sum256([]byte(password))
 			password = hex.EncodeToString(h[:])
 			if !ok || username != wsh.username || !strings.EqualFold(password, wsh.password) {
