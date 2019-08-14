@@ -87,11 +87,12 @@ func DjaliInfo(node *core.OpenBazaarNode, cookie http.Cookie, config schema.APIC
 			return
 		}
 		fmt.Fprintf(w,
-			`{"repoPath": "%v", "cookie": "%v", "username": "%v", "password": "%v"}`,
+			`{"repoPath": "%v", "cookie": "%v", "username": "%v", "password": "%v", "authenticated": %v}`,
 			strings.ReplaceAll(node.RepoPath, "\\", "\\\\"),
 			cookie.String(),
 			config.Username,
-			config.Password)
+			config.Password,
+			config.Authenticated)
 		return
 	}
 
