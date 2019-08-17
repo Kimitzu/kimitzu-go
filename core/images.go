@@ -9,7 +9,7 @@ import (
 	"image/draw"
 	"image/gif"
 	_ "image/gif" // load png
-	jpeg "image/jpeg"
+	"image/jpeg"
 	_ "image/png"
 	"io"
 	"io/ioutil"
@@ -22,11 +22,11 @@ import (
 	"time"
 
 	ipath "gx/ipfs/QmQAgv6Gaoe2tQpcabqwKXKChp2MZ7i3UXv9DqTTaxCaTR/go-path"
-	cid "gx/ipfs/QmTbxNB1NwDesLmKTscr4udL2tVP7MaxvXnD1D9yX7g3PN/go-cid"
+	"gx/ipfs/QmTbxNB1NwDesLmKTscr4udL2tVP7MaxvXnD1D9yX7g3PN/go-cid"
 
 	"github.com/OpenBazaar/openbazaar-go/ipfs"
 	"github.com/OpenBazaar/openbazaar-go/pb"
-	"github.com/discordapp/lilliput"
+	"github.com/bamiaux/rez"
 	"github.com/nfnt/resize"
 )
 
@@ -192,8 +192,16 @@ func ImageToPaletted(img image.Image) *image.Paletted {
 	return pm
 }
 
-func ProcessImage(img image.Image) image.Image {
-	return resize.Resize(250, 0, img, resize.NearestNeighbor)
+func ProcessImage(img image.Image, width uint, height uint) image.Image {
+
+	newImage := image.NewRGBA(image.Rect(0, 0, int(width), int(height)))
+	err := rez.Convert(newImage, img, rez.NewBilinearFilter())
+	if err != nil {
+		fmt.Println(err)
+	}
+	return newImage
+	//return imaging.Resize(img, 0, int(height), imaging.NearestNeighbor)
+	//return resize.Resize(0, height, img, resize.NearestNeighbor)
 }
 
 func (n *OpenBazaarNode) addResizedGif(base64data string, imgCfg *image.Config, w, h uint, imgPath string, imgType string) (string, error) {
@@ -201,49 +209,43 @@ func (n *OpenBazaarNode) addResizedGif(base64data string, imgCfg *image.Config, 
 	width, height := getImageAttributes(w, h, uint(imgCfg.Width), uint(imgCfg.Height))
 
 	inputBuf, _ := base64.StdEncoding.DecodeString(base64data)
-	decoder, err := lilliput.NewDecoder(inputBuf)
-	// this error reflects very basic checks,
-	// mostly just for the magic bytes of the file to match known image formats
+
+	gifReader := bytes.NewReader(inputBuf)
+
+	im, err := gif.DecodeAll(gifReader)
 	if err != nil {
-		fmt.Printf("error decoding image, %s\n", err)
-		os.Exit(1)
-	}
-	defer decoder.Close()
-
-	// get ready to resize image,
-	// using 8192x8192 maximum resize buffer size
-	ops := lilliput.NewImageOps(8192)
-	defer ops.Close()
-
-	// create a buffer to store the output image, 50MB in this case
-	outputImg := make([]byte, 50*1024*1024)
-
-	opts := &lilliput.ImageOptions{
-		FileType:     ".gif",
-		Width:        int(width),
-		Height:       int(height),
-		ResizeMethod: lilliput.ImageOpsResize,
+		log.Fatal(err.Error())
 	}
 
-	// resize and transcode image
-	outputImg, err = ops.Transform(decoder, opts, outputImg)
-	if err != nil {
-		fmt.Printf("error transforming image, %s\n", err)
-		os.Exit(1)
+	// Create a new RGBA image to hold the incremental frames.
+	firstFrame := im.Image[0].Bounds()
+	b := image.Rect(0, 0, firstFrame.Dx(), firstFrame.Dy())
+	img := image.NewRGBA(b)
+
+	for index, frame := range im.Image {
+		bounds := frame.Bounds()
+		draw.Draw(img, bounds, frame, bounds.Min, draw.Over)
+
+		processedImage := ProcessImage(img, width, height)
+
+		pm := image.NewPaletted(processedImage.Bounds(), im.Image[0].Palette)
+		start := time.Now()
+		draw.FloydSteinberg.Draw(pm, processedImage.Bounds(), processedImage, image.ZP)
+		im.Image[index] = pm
+		fmt.Println("Time to palette:", time.Since(start))
 	}
+
+	im.Config.Width = int(width)
+	im.Config.Height = int(height)
 
 	out, err := os.Create(imgPath)
 	if err != nil {
 		return "", err
 	}
+	defer out.Close()
 
-	err = ioutil.WriteFile(imgPath, outputImg, 0400)
-	if err != nil {
-		fmt.Printf("error writing out resized image, %s\n", err)
-		os.Exit(1)
-	}
+	gif.EncodeAll(out, im)
 
-	out.Close()
 	return ipfs.AddFile(n.IpfsNode, imgPath)
 }
 
