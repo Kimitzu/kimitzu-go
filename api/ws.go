@@ -106,8 +106,19 @@ func (wsh wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+
 	if wsh.authenticated {
-		if wsh.username == "" || wsh.password == "" {
+		username, password, ok := r.BasicAuth()
+		if username != "" && password != "" {
+			h := sha256.Sum256([]byte(password))
+			password = hex.EncodeToString(h[:])
+			if !ok || username != wsh.username || !strings.EqualFold(password, wsh.password) {
+				wsh.logger.Error("refused websocket connection: invalid username and/or password")
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprint(w, "403 - Forbidden - Invalid Credentials")
+				return
+			}
+		} else {
 			cookie, err := r.Cookie("OpenBazaar_Auth_Cookie")
 			if err != nil {
 				wsh.logger.Error("refused websocket connection: no cookie present")
@@ -115,20 +126,10 @@ func (wsh wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				fmt.Fprint(w, "403 - Forbidden - No cookie present")
 				return
 			}
-			if wsh.cookie.Value != cookie.Value {
+			if wsh.cookie.Value != cookie.Value || cookie.Value == "" {
 				wsh.logger.Error("refused websocket connection: invalid cookie")
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprint(w, "403 - Forbidden - Invalid Cookie")
-				return
-			}
-		} else {
-			username, password, ok := r.BasicAuth()
-			h := sha256.Sum256([]byte(password))
-			password = hex.EncodeToString(h[:])
-			if !ok || username != wsh.username || !strings.EqualFold(password, wsh.password) {
-				wsh.logger.Error("refused websocket connection: invalid username and/or password")
-				w.WriteHeader(http.StatusForbidden)
-				fmt.Fprint(w, "403 - Forbidden - Invalid Credentials")
 				return
 			}
 		}
