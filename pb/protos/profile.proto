@@ -45,7 +45,7 @@ message Profile {
     repeated CustomField customFields      = 6665;
 
     message CustomField {
-        string key = 1;
+        string label = 1;
         string value = 2;
     }
 
