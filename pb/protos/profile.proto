@@ -42,6 +42,12 @@ message Profile {
     string profileType                     = 6662;
     map<string, string> metaTags           = 6663;
     Preferences preferences                = 6664;
+    repeated CustomField customFields      = 6665;
+
+    message CustomField {
+        string key = 1;
+        string value = 2;
+    }
 
     message Preferences {
         string currencyDisplay      = 1;
