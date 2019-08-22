@@ -1,11 +1,11 @@
 {
   "name": "openbazaar-go",
   "author": "OB1 Company",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "language": "english",
   "license": "",
   "bugs": {
-    "url": "https://github.com/OpenBazaar/openbazaar-go/issues/new"
+    "url": "https://github.com/djali-foundation/djali-go/issues/new"
   },
   "gxVersion": "0.11.0"
 }

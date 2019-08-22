@@ -24,11 +24,11 @@ A typical install of OpenBazaar contains a bundle of the server daemon and user 
 
 ### Install Pre-built Packages
 
-The easiest way to run the server is to download a pre-built binary. You can find binaries of our latest release for each operating system [here](https://github.com/OpenBazaar/openbazaar-go/releases/).
+The easiest way to run the server is to download a pre-built binary. You can find binaries of our latest release for each operating system [here](https://github.com/djali-foundation/djali-go/releases/).
 
 ### Build from Source
 
-To build from source you will need to have Go installed and properly configured. Detailed instructions for installing Go and openbazaar-go on each operating system can be found in the [docs package](https://github.com/OpenBazaar/openbazaar-go/tree/master/docs).
+To build from source you will need to have Go installed and properly configured. Detailed instructions for installing Go and openbazaar-go on each operating system can be found in the [docs package](https://github.com/djali-foundation/djali-go/tree/master/docs).
 
 ## Dependency Management
 
@@ -40,7 +40,7 @@ We are using a [fork](https://github.com/OpenBazaar/go-ipfs) of go-ipfs in the d
 
 ## Updating
 
-You can either pull in remote changes as normal or run `go get -u github.com/OpenBazaar/openbazaar-go`.
+You can either pull in remote changes as normal or run `go get -u github.com/djali-foundation/djali-go`.
 
 ## Usage
 
@@ -97,7 +97,7 @@ Documentation of the OpenBazaar protocol has not been formalized yet. If you wou
 
 ## Contributing
 
-Contributions are definitely welcome! Please read the Contributing [Guidelines](https://github.com/OpenBazaar/openbazaar-go/blob/master/CONTRIBUTING.md) before starting.
+Contributions are definitely welcome! Please read the Contributing [Guidelines](https://github.com/djali-foundation/djali-go/blob/master/CONTRIBUTING.md) before starting.
 
 ## License
 [MIT](https://github.com/djali-foundation/djali-go/blob/master/LICENSE).

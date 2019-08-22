@@ -171,9 +171,6 @@ func (n *OpenBazaarNode) SignDispute(contract *pb.RicardianContract) (*pb.Ricard
 	}
 	s := new(pb.Signature)
 	s.Section = pb.Signature_DISPUTE
-	if err != nil {
-		return contract, err
-	}
 	guidSig, err := n.IpfsNode.PrivateKey.Sign(serializedDispute)
 	if err != nil {
 		return contract, err
@@ -308,9 +305,12 @@ func (n *OpenBazaarNode) ProcessDisputeOpen(rc *pb.RicardianContract, peerID str
 		DisputerHandle = contract.BuyerOrder.BuyerID.Handle
 		DisputeeID = contract.VendorListings[0].VendorID.PeerID
 		DisputeeHandle = contract.VendorListings[0].VendorID.Handle
-		// Load out version of the contract from the db
+		// Load our version of the contract from the db
 		myContract, state, _, records, _, _, err := n.Datastore.Sales().GetByOrderId(orderID)
 		if err != nil {
+			if err := n.SendProcessingError(DisputerID, orderID, pb.Message_DISPUTE_OPEN, nil); err != nil {
+				log.Errorf("failed sending ORDER_PROCESSING_FAILURE to peer (%s): %s", DisputerID, err)
+			}
 			return net.OutOfOrderMessage
 		}
 		// Check this order is currently in a state which can be disputed
@@ -368,6 +368,9 @@ func (n *OpenBazaarNode) ProcessDisputeOpen(rc *pb.RicardianContract, peerID str
 			return err
 		}
 		if state == pb.OrderState_AWAITING_PAYMENT || state == pb.OrderState_AWAITING_FULFILLMENT || state == pb.OrderState_PARTIALLY_FULFILLED || state == pb.OrderState_PENDING {
+			if err := n.SendProcessingError(DisputerID, orderID, pb.Message_DISPUTE_OPEN, myContract); err != nil {
+				log.Errorf("failed sending ORDER_PROCESSING_FAILURE to peer (%s): %s", DisputerID, err)
+			}
 			return net.OutOfOrderMessage
 		}
 		// Check this order is currently in a state which can be disputed
@@ -620,11 +623,7 @@ func (n *OpenBazaarNode) CloseDispute(orderID string, buyerPercentage, vendorPer
 	if err != nil {
 		return err
 	}
-	mPrivKey := n.MasterPrivateKey
-	if err != nil {
-		return err
-	}
-	mECKey, err := mPrivKey.ECPrivKey()
+	mECKey, err := n.MasterPrivateKey.ECPrivKey()
 	if err != nil {
 		return err
 	}
@@ -729,9 +728,6 @@ func (n *OpenBazaarNode) SignDisputeResolution(contract *pb.RicardianContract) (
 	}
 	s := new(pb.Signature)
 	s.Section = pb.Signature_DISPUTE_RESOLUTION
-	if err != nil {
-		return contract, err
-	}
 	guidSig, err := n.IpfsNode.PrivateKey.Sign(serializedDR)
 	if err != nil {
 		return contract, err
@@ -1062,11 +1058,7 @@ func (n *OpenBazaarNode) ReleaseFunds(contract *pb.RicardianContract, records []
 	if err != nil {
 		return err
 	}
-	mPrivKey := n.MasterPrivateKey
-	if err != nil {
-		return err
-	}
-	mECKey, err := mPrivKey.ECPrivKey()
+	mECKey, err := n.MasterPrivateKey.ECPrivKey()
 	if err != nil {
 		return err
 	}

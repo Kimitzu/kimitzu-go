@@ -50,19 +50,19 @@ Go should now be installed.
 
 Checkout a copy of the source:
 ```
-go get github.com/OpenBazaar/openbazaar-go
+go get github.com/djali-foundation/djali-go
 ```
 
-It will use git to checkout the source code into `$GOPATH/src/github.com/OpenBazaar/openbazaar-go`
+It will use git to checkout the source code into `$GOPATH/src/github.com/djali-foundation/djali-go`
 
 Checkout a release version:
 ```
-git checkout v0.13.4
+git checkout v0.13.5
 ```
 
-Note: `go get` leaves the repo pointing at `master` which is a branch used for active development. Running OpenBazaar from `master` is NOT recommended. Check the [release versions](https://github.com/OpenBazaar/openbazaar-go/releases) for the available versions that you use iin checkout.
+Note: `go get` leaves the repo pointing at `master` which is a branch used for active development. Running OpenBazaar from `master` is NOT recommended. Check the [release versions](https://github.com/djali-foundation/djali-go/releases) for the available versions that you use iin checkout.
 
 To compile and run the source using the path above, WITHOUT encrypting the database:
 ```
-go run $GOPATH/src/github.com/OpenBazaar/openbazaar-go/openbazaard.go start
+go run $GOPATH/src/github.com/djali-foundation/djali-go/openbazaard.go start
 ```
