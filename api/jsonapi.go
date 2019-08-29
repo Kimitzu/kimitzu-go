@@ -3483,11 +3483,11 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	djaliresp := core.DjaliRatingResp{}
+	djaliresp.BuyerRatings = buyerRatings.Ratings
 
 	if slug != "" {
 		// Other peer ID Rating
-		djaliresp := core.DjaliRatingResp{}
-		djaliresp.BuyerRatings = buyerRatings.Ratings
 		rating := new(core.SavedRating)
 		rating.Djali = djaliresp
 		for _, r := range ratingList {
@@ -3504,11 +3504,13 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 		SanitizedResponse(w, string(ret))
 	} else {
 		type resp struct {
-			Count   int      `json:"count"`
-			Average float32  `json:"average"`
-			Ratings []string `json:"ratings"`
+			Count   int                  `json:"count"`
+			Average float32              `json:"average"`
+			Ratings []string             `json:"ratings"`
+			Djali   core.DjaliRatingResp `json:"djali"`
 		}
 		ratingRet := new(resp)
+		ratingRet.Djali = djaliresp
 		total := float32(0)
 		count := 0
 		for _, r := range ratingList {
