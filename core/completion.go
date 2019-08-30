@@ -57,9 +57,9 @@ type DjaliRatingResp struct {
 	BuyerRatings []*pb.EntityRating `json:"buyerRatings"`
 }
 
-func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) int {
+func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) float64 {
 	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
-	total := 0
+	total := float64(0)
 	sumWeight := 0
 	for _, field := range rating.Fields {
 		sumWeight += int(field.Weight)
@@ -70,7 +70,7 @@ func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) int {
 		if maxScore == 0 {
 			maxScore = 5
 		}
-		total += ((int(field.Weight) / sumWeight) * 100) * (int(field.Score) / maxScore)
+		total += ((float64(field.Weight) / float64(sumWeight)) * 100) * (float64(field.Score) / float64(maxScore))
 	}
 
 	return total
@@ -79,7 +79,7 @@ func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) int {
 // ComputeAverage - Computes the average rating
 func (r *DjaliRatingResp) ComputeAverage() int {
 	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
-	total := 0
+	total := float64(0)
 	for _, rating := range r.BuyerRatings {
 		total += r.computeFields(rating)
 	}
@@ -87,8 +87,9 @@ func (r *DjaliRatingResp) ComputeAverage() int {
 	if total == 0 || len(r.BuyerRatings) == 0 {
 		return 0
 	}
+	total = total / float64(len(r.BuyerRatings))
 
-	return total / len(r.BuyerRatings)
+	return int(total)
 }
 
 // SavedRating - represent saved rating
