@@ -13,13 +13,14 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/jsonpb"
+	"github.com/OpenBazaar/wallet-interface"
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/djali-foundation/djali-go/ipfs"
 	"github.com/djali-foundation/djali-go/pb"
 	"github.com/djali-foundation/djali-go/repo"
-	"github.com/OpenBazaar/wallet-interface"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
+	"github.com/golang/protobuf/ptypes/timestamp"
 )
 
 const (
@@ -562,6 +563,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 		}
 	}()
 
+	rating.Timestamp = &timestamp.Timestamp{Seconds: time.Now().Unix()}
 	ratings.Ratings = append(ratings.Ratings, rating)
 
 	j, jerr := json.MarshalIndent(ratings, "", "    ")
