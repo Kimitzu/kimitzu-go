@@ -3465,6 +3465,8 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 	if indexBytes == nil {
 		djaliresp := core.DjaliRatingResp{}
 		djaliresp.BuyerRatings = buyerRatings.Ratings
+		djaliresp.Count = len(buyerRatings.Ratings)
+		djaliresp.Average = djaliresp.ComputeAverage()
 		rating := new(core.SavedRating)
 		rating.Djali = djaliresp
 		rating.Ratings = []string{}
@@ -3485,6 +3487,8 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 	}
 	djaliresp := core.DjaliRatingResp{}
 	djaliresp.BuyerRatings = buyerRatings.Ratings
+	djaliresp.Count = len(buyerRatings.Ratings)
+	djaliresp.Average = djaliresp.ComputeAverage()
 
 	if slug != "" {
 		// Other peer ID Rating

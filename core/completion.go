@@ -52,7 +52,43 @@ type RatingData struct {
 
 // DjaliRatingResp - additional ratings
 type DjaliRatingResp struct {
+	Count        int                `json:"count"`
+	Average      int                `json:"average"`
 	BuyerRatings []*pb.EntityRating `json:"buyerRatings"`
+}
+
+func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) int {
+	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
+	total := 0
+	sumWeight := 0
+	for _, field := range rating.Fields {
+		sumWeight += int(field.Weight)
+	}
+
+	for _, field := range rating.Fields {
+		maxScore := int(field.Max)
+		if maxScore == 0 {
+			maxScore = 5
+		}
+		total += ((int(field.Weight) / sumWeight) * 100) * (int(field.Score) / maxScore)
+	}
+
+	return total
+}
+
+// ComputeAverage - Computes the average rating
+func (r *DjaliRatingResp) ComputeAverage() int {
+	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
+	total := 0
+	for _, rating := range r.BuyerRatings {
+		total += r.computeFields(rating)
+	}
+
+	if total == 0 || len(r.BuyerRatings) == 0 {
+		return 0
+	}
+
+	return total / len(r.BuyerRatings)
 }
 
 // SavedRating - represent saved rating
