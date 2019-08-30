@@ -3503,6 +3503,7 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 		}
 		SanitizedResponse(w, string(ret))
 	} else {
+		// Other peer ID without slug, basically everything
 		type resp struct {
 			Count   int                  `json:"count"`
 			Average float32              `json:"average"`

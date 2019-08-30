@@ -43,6 +43,11 @@ message Profile {
     map<string, string> metaTags           = 6663;
     Preferences preferences                = 6664;
     repeated CustomField customFields      = 6665;
+    map<string, CustomProperty> customProps = 6666;
+
+    message CustomProperty {
+        repeated string values = 1;
+    }
 
     message CustomField {
         string label = 1;
