@@ -314,6 +314,9 @@ message EntityRating {
     repeated RatingFields fields = 4;
     google.protobuf.Timestamp timestamp = 5;
 
+    string sourceId = 6;
+    string targetId = 7;
+
     message RatingFields {
         RatingType type = 1;
         uint64 score    = 2;

@@ -9,8 +9,8 @@ import (
 
 	"time"
 
-	"github.com/djali-foundation/djali-go/pb"
 	"github.com/OpenBazaar/wallet-interface"
+	"github.com/djali-foundation/djali-go/pb"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 )
@@ -137,6 +137,8 @@ func (n *OpenBazaarNode) FulfillOrder(fulfillment *pb.OrderFulfillment, contract
 	rs.Signature = signature
 
 	fulfillment.RatingSignature = rs
+	fulfillment.BuyerRating.SourceId = contract.VendorListings[0].VendorID.PeerID // If this fails then there's already something
+	fulfillment.BuyerRating.TargetId = contract.BuyerOrder.BuyerID.PeerID         // wrong with the contract to begin with.
 
 	var fulfils []*pb.OrderFulfillment
 
