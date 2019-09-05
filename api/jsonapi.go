@@ -3459,8 +3459,8 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 		buyerRatingBytes, _ = ioutil.ReadFile(path.Join(i.node.RepoPath, "root", "entityratings", "buyer.json"))
 	}
 	if buyerRatingBytes != nil {
-		jsonpb.UnmarshalString(string(buyerRatingBytes), &buyerRatings)
-		//json.Unmarshal(buyerRatingBytes, &buyerRatings)
+		//jsonpb.UnmarshalString(string(buyerRatingBytes), &buyerRatings)
+		json.Unmarshal(buyerRatingBytes, &buyerRatings)
 	}
 	if indexBytes == nil {
 		djaliresp := core.DjaliRatingResp{}
