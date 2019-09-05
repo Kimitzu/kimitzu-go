@@ -61,6 +61,9 @@ func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) float64 {
 	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
 	total := float64(0)
 	sumWeight := 0
+	if rating.Fields == nil {
+		return 0
+	}
 	for _, field := range rating.Fields {
 		sumWeight += int(field.Weight)
 	}
@@ -80,11 +83,13 @@ func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) float64 {
 func (r *DjaliRatingResp) ComputeAverage() int {
 	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
 	total := float64(0)
+	if len(r.BuyerRatings) == 0 {
+		return 0
+	}
 	for _, rating := range r.BuyerRatings {
 		total += r.computeFields(rating)
 	}
-
-	if total == 0 || len(r.BuyerRatings) == 0 {
+	if total == 0 {
 		return 0
 	}
 	total = total / float64(len(r.BuyerRatings))

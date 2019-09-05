@@ -355,7 +355,7 @@ func (n *OpenBazaarNode) SendOrderConfirmation(peerID string, contract *pb.Ricar
 	}
 	orderID0 := contract.VendorOrderConfirmation.OrderID
 	if orderID0 == "" {
-		log.Errorf("failed fetching orderID")
+		log.Errorf("confirm: failed fetching orderID")
 	} else {
 		err = n.Datastore.Messages().Put(
 			fmt.Sprintf("%s-%d", orderID0, int(pb.Message_ORDER_CONFIRMATION)),
@@ -460,7 +460,7 @@ func (n *OpenBazaarNode) SendOrderFulfillment(peerID string, k *libp2p.PubKey, f
 	}
 	orderID0 := fulfillmentMessage.VendorOrderFulfillment[0].OrderId
 	if orderID0 != "" {
-		log.Errorf("failed fetching orderID")
+		log.Errorf("fulfill: failed fetching orderID")
 	} else {
 		err = n.Datastore.Messages().Put(
 			fmt.Sprintf("%s-%d", orderID0, int(pb.Message_ORDER_FULFILLMENT)),
@@ -485,7 +485,7 @@ func (n *OpenBazaarNode) SendOrderCompletion(peerID string, k *libp2p.PubKey, co
 	}
 	orderID0 := completionMessage.BuyerOrderCompletion.OrderId
 	if orderID0 == "" {
-		log.Errorf("failed fetching orderID")
+		log.Errorf("ordercomplete: failed fetching orderID")
 	} else {
 		err = n.Datastore.Messages().Put(
 			fmt.Sprintf("%s-%d", orderID0, int(pb.Message_ORDER_COMPLETION)),
