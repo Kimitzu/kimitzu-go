@@ -312,7 +312,7 @@ message EntityRating {
     string slug                  = 2;
     string orderId               = 3;
     repeated RatingFields fields = 4;
-    google.protobuf.Timestamp timestamp = 5;
+    string timestamp = 5;
 
     string sourceId = 6;
     string targetId = 7;

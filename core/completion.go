@@ -604,7 +604,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 		}
 	}()
 
-	rating.Timestamp, _ = ptypes.TimestampProto(time.Now())
+	rating.Timestamp = time.Now().Format(time.RFC3339Nano)
 	ratings.Ratings = append(ratings.Ratings, rating)
 
 	j, jerr := json.MarshalIndent(ratings, "", "    ")
