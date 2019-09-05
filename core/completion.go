@@ -20,7 +20,6 @@ import (
 	"github.com/djali-foundation/djali-go/repo"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/golang/protobuf/ptypes/timestamp"
 )
 
 const (
@@ -605,7 +604,7 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 		}
 	}()
 
-	rating.Timestamp = &timestamp.Timestamp{Seconds: time.Now().Unix()}
+	rating.Timestamp, _ = ptypes.TimestampProto(time.Now())
 	ratings.Ratings = append(ratings.Ratings, rating)
 
 	j, jerr := json.MarshalIndent(ratings, "", "    ")
