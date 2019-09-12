@@ -30,6 +30,10 @@ import (
 	manet "gx/ipfs/Qmc85NSvmSG4Frn9Vb2cBc1rMyULH6D3TNVEfCzSKoUpip/go-multiaddr-net"
 	proto "gx/ipfs/QmddjPSGZb3ieihSseFeCfVRpZzcqczPNsD2DvarSwnjJB/gogo-protobuf/proto"
 
+	wi "github.com/OpenBazaar/wallet-interface"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcutil/base58"
+	"github.com/btcsuite/btcutil/hdkeychain"
 	"github.com/djali-foundation/djali-go/api"
 	"github.com/djali-foundation/djali-go/core"
 	"github.com/djali-foundation/djali-go/ipfs"
@@ -45,10 +49,6 @@ import (
 	"github.com/djali-foundation/djali-go/wallet"
 	lis "github.com/djali-foundation/djali-go/wallet/listeners"
 	"github.com/djali-foundation/djali-go/wallet/resync"
-	wi "github.com/OpenBazaar/wallet-interface"
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcutil/base58"
-	"github.com/btcsuite/btcutil/hdkeychain"
 	"github.com/fatih/color"
 	"github.com/ipfs/go-ipfs/commands"
 	ipfscore "github.com/ipfs/go-ipfs/core"
@@ -684,6 +684,9 @@ func (x *Start) Execute(args []string) error {
 		core.Node.Service.WaitForReady()
 		log.Info("Djali(OpenBazaar) Service Ready")
 
+		// Start OnlineStatusBroadcaster
+		go onlineStatusBroadcaster(core.Node)
+
 		core.Node.StartMessageRetriever()
 		core.Node.StartPointerRepublisher()
 		core.Node.StartRecordAgingNotifier()
@@ -709,6 +712,77 @@ func (x *Start) Execute(args []string) error {
 	}
 
 	return nil
+}
+
+func onlineStatusBroadcaster(n *core.OpenBazaarNode) {
+	onlinePath := path.Join(n.RepoPath, "root", "lastOnline")
+
+	log.Info("Online Broadcaster Started")
+	defer func() {
+		log.Info("Online Broadcaster Ended")
+	}()
+
+	settings, err := n.Datastore.Settings().Get()
+	if err != nil {
+		log.Errorf("StatusBroadcaster closed: Settings not set")
+		return
+	}
+
+	interval := settings.OnlineBroadcastInterval
+	if interval == -1 {
+		log.Info("Disabled interval, stopping Online Broadcaster...")
+		return
+	}
+
+	for {
+
+		newStore := false
+		var f *os.File
+		var err error
+
+		_, ferr := os.Stat(onlinePath)
+		if os.IsNotExist(ferr) {
+			f, err = os.Create(onlinePath)
+			if err != nil {
+				log.Error("File Create Error", err)
+			}
+			newStore = true
+		} else {
+			f, err = os.OpenFile(onlinePath, os.O_WRONLY, os.ModePerm)
+			if err != nil {
+				log.Error("File Open Error", err)
+			}
+		}
+
+		defer func() {
+			if newStore {
+				_, err := ipfs.AddFile(n.IpfsNode, onlinePath)
+				if err != nil {
+					fmt.Println("IPFS Publish Error")
+				}
+			}
+		}()
+
+		j := time.Now().Unix()
+		_, werr := f.Write([]byte(fmt.Sprintf("%v", j)))
+		if werr != nil {
+			f.Close()
+			log.Error("Write Error:", werr)
+		}
+
+		f.Close()
+
+		n.SeedNode()
+
+		// If interval is 0, only publish once then end the broadcaster.
+		if interval == 0 {
+			log.Info("No interval set, setting default to 1 hour...")
+			interval = 3600
+		}
+
+		time.Sleep(time.Second * time.Duration(interval))
+	}
+
 }
 
 func setTestmodeRecordAgingIntervals() {
