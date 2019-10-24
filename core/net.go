@@ -1,19 +1,20 @@
 package core
 
 import (
-	"crypto/rand"
+	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/OpenBazaar/openbazaar-go/net"
 	"gx/ipfs/QmUadX5EcvrBmxAV9sE7wUWtWSqxns5K84qKJBixmcT1w9/go-datastore"
 	"gx/ipfs/QmYxUdYY9S6yg5tSPVin5GFTvtfsLauVcr7reHDD3dM8xf/go-libp2p-routing"
 	"sync"
 	"time"
 
-	"golang.org/x/crypto/nacl/box"
-
 	libp2p "gx/ipfs/QmTW4SdgBWq9GjsBsHeUx8WuGxzhgzAf88UMH2w62PC8yK/go-libp2p-crypto"
 	"gx/ipfs/QmTbxNB1NwDesLmKTscr4udL2tVP7MaxvXnD1D9yX7g3PN/go-cid"
 	"gx/ipfs/QmYVXrKrKHDC9FobgmcmshCDyWwdrfwfanNQN4oxJ9Fk3h/go-libp2p-peer"
+	"gx/ipfs/QmerPMzPk1mJVowm8KgmoknWa4yCYvvugMPsgWmDNUvDLW/go-multihash"
+	"github.com/OpenBazaar/openbazaar-go/ipfs"
 
 	"github.com/OpenBazaar/openbazaar-go/pb"
 	"github.com/OpenBazaar/openbazaar-go/repo"
@@ -74,11 +75,6 @@ func (n *OpenBazaarNode) SendOfflineMessage(p peer.ID, k *libp2p.PubKey, m *pb.M
 		return merr
 	}
 
-	// Encrypt envelope for relay server
-
-	// Generate an ephemeral key pair
-	_, ephemPriv, _ := box.GenerateKey(rand.Reader)
-
 	ctx, cancel := context.WithTimeout(context.Background(), n.OfflineMessageFailoverTimeout)
 	defer cancel()
 	if k == nil {
@@ -100,84 +96,75 @@ func (n *OpenBazaarNode) SendOfflineMessage(p peer.ID, k *libp2p.PubKey, m *pb.M
 		k = &pubKey
 	}
 
-	// Generate nonce
-	var nonce [24]byte
-	noncedata := make([]byte, 24)
-	rand.Read(noncedata)
-	for i := 0; i < 24; i++ {
-		nonce[i] = noncedata[i]
+	relayciphertext, err := net.Encrypt(*k, messageBytes)
+	if err != nil {
+		fmt.Errorf("Error: %s", err.Error())
 	}
 
-	// Encrypt
-	var ciphertext []byte
-	keybytes, _ := libp2p.MarshalPublicKey(*k)
-	var pkey *[32]byte
-	copy(pkey[:], keybytes[:32])
+	// Base64 encode
+	encodedCipherText := base64.StdEncoding.EncodeToString(relayciphertext)
 
-	box.Seal(ciphertext, messageBytes, &nonce, pkey, ephemPriv)
+	n.WebRelayManager.SendRelayMessage(encodedCipherText, p.String())
 
 	// TODO: this function blocks if the recipient's public key is not on the local machine
-	//ciphertext, cerr := n.EncryptMessage(p, k, messageBytes)
-	//if cerr != nil {
-	//	return cerr
-	//}
+	ciphertext, cerr := n.EncryptMessage(p, k, messageBytes)
+	if cerr != nil {
+		return cerr
+	}
 
-	// Send to webrelay
+	addr, aerr := n.MessageStorage.Store(p, ciphertext)
+	if aerr != nil {
+		return aerr
+	}
+	mh, mherr := multihash.FromB58String(p.Pretty())
+	if mherr != nil {
+		return mherr
+	}
+	/* TODO: We are just using a default prefix length for now. Eventually we will want to customize this,
+	  but we will need some way to get the recipient's desired prefix length. Likely will be in profile. */
+	pointer, err := ipfs.NewPointer(mh, DefaultPointerPrefixLength, addr, ciphertext)
+	if err != nil {
+		return err
+	}
+	if m.MessageType != pb.Message_OFFLINE_ACK {
+		pointer.Purpose = ipfs.MESSAGE
+		pointer.CancelID = &p
+		err = n.Datastore.Pointers().Put(pointer)
+		if err != nil {
+			return err
+		}
+	}
+	log.Debugf("Sending offline message to: %s, Message Type: %s, PointerID: %s, Location: %s", p.Pretty(), m.MessageType.String(), pointer.Cid.String(), pointer.Value.Addrs[0].String())
+	OfflineMessageWaitGroup.Add(2)
+	go func() {
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		err := ipfs.PublishPointer(n.DHT, ctx, pointer)
+		if err != nil {
+			log.Error(err)
+		}
 
-	//
-	//addr, aerr := n.MessageStorage.Store(p, ciphertext)
-	//if aerr != nil {
-	//	return aerr
-	//}
-	//mh, mherr := multihash.FromB58String(p.Pretty())
-	//if mherr != nil {
-	//	return mherr
-	//}
-	///* TODO: We are just using a default prefix length for now. Eventually we will want to customize this,
-	//   but we will need some way to get the recipient's desired prefix length. Likely will be in profile. */
-	//pointer, err := ipfs.NewPointer(mh, DefaultPointerPrefixLength, addr, ciphertext)
-	//if err != nil {
-	//	return err
-	//}
-	//if m.MessageType != pb.Message_OFFLINE_ACK {
-	//	pointer.Purpose = ipfs.MESSAGE
-	//	pointer.CancelID = &p
-	//	err = n.Datastore.Pointers().Put(pointer)
-	//	if err != nil {
-	//		return err
-	//	}
-	//}
-	//log.Debugf("Sending offline message to: %s, Message Type: %s, PointerID: %s, Location: %s", p.Pretty(), m.MessageType.String(), pointer.Cid.String(), pointer.Value.Addrs[0].String())
-	//OfflineMessageWaitGroup.Add(2)
-	//go func() {
-	//	ctx, cancel := context.WithCancel(context.Background())
-	//	defer cancel()
-	//	err := ipfs.PublishPointer(n.DHT, ctx, pointer)
-	//	if err != nil {
-	//		log.Error(err)
-	//	}
-	//
-	//	// Push provider to our push nodes for redundancy
-	//	for _, p := range n.PushNodes {
-	//		ctx, cancel := context.WithCancel(context.Background())
-	//		defer cancel()
-	//		err := ipfs.PutPointerToPeer(n.DHT, ctx, p, pointer)
-	//		if err != nil {
-	//			log.Error(err)
-	//		}
-	//	}
-	//
-	//	OfflineMessageWaitGroup.Done()
-	//}()
-	//go func() {
-	//	ctx, cancel := context.WithCancel(context.Background())
-	//	defer cancel()
-	//	err := n.Pubsub.Publisher.Publish(ctx, pointer.Cid.String(), ciphertext)
-	//	if err != nil {
-	//		log.Error(err)
-	//	}
-	//	OfflineMessageWaitGroup.Done()
-	//}()
+		// Push provider to our push nodes for redundancy
+		for _, p := range n.PushNodes {
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+			err := ipfs.PutPointerToPeer(n.DHT, ctx, p, pointer)
+			if err != nil {
+				log.Error(err)
+			}
+		}
+
+		OfflineMessageWaitGroup.Done()
+	}()
+	go func() {
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		err := n.Pubsub.Publisher.Publish(ctx, pointer.Cid.String(), ciphertext)
+		if err != nil {
+			log.Error(err)
+		}
+		OfflineMessageWaitGroup.Done()
+	}()
 	return nil
 }
 
