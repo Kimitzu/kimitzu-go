@@ -86,6 +86,7 @@ func connectToServer(relay string, sender string) (*websocket.Conn, error) {
 
 	socketmessage, _ := json.Marshal(typedmessage)
 
+	fmt.Println(string(socketmessage))
 	// Connect to websocket server
 	fmt.Printf("Connecting to relay server: %s\n", relay)
 
@@ -106,7 +107,7 @@ func connectToServer(relay string, sender string) (*websocket.Conn, error) {
 	go func() {
 		for {
 			// read in a message
-			messageType, p, err := c.ReadMessage()
+			_, p, err := c.ReadMessage()
 			if err != nil {
 				fmt.Println(err)
 				//return nil, err
@@ -114,10 +115,10 @@ func connectToServer(relay string, sender string) (*websocket.Conn, error) {
 			// print out that message for clarity
 			fmt.Printf("Received incoming message from relay: %s\n", string(p))
 
-			if err := c.WriteMessage(messageType, p); err != nil {
-				fmt.Println(err)
-				//return nil, err
-			}
+			//if err := c.WriteMessage(messageType, p); err != nil {
+			//	fmt.Println(err)
+			//	//return nil, err
+			//}
 
 		}
 	}()
