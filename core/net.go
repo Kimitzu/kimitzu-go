@@ -81,7 +81,7 @@ func (n *OpenBazaarNode) SendOfflineMessage(p peer.ID, k *libp2p.PubKey, m *pb.M
 	defer cancel()
 	if k == nil {
 		var pubKey libp2p.PubKey
-		keyval, err := n.IpfsNode.Repo.Datastore().Get(datastore.NewKey(KeyCachePrefix + p.Pretty()))
+		keyval, err := n.IpfsNode.Repo.Datastore().Get(datastore.NewKey("/pubkey/" + p.Pretty()))
 		if err != nil {
 			pubKey, err = routing.GetPublicKey(n.IpfsNode.Routing, ctx, p)
 			if err != nil {
