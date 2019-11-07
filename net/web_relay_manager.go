@@ -6,9 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/btcsuite/btcutil/base58"
+
+	"gx/ipfs/QmerPMzPk1mJVowm8KgmoknWa4yCYvvugMPsgWmDNUvDLW/go-multihash"
+
 	"github.com/gorilla/websocket"
-	"github.com/mr-tron/base58/base58"
-	"github.com/multiformats/go-multihash"
 )
 
 type WebRelayManager struct {
