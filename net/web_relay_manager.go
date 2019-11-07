@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
+
 	"github.com/gorilla/websocket"
 	"github.com/mr-tron/base58/base58"
 	"github.com/multiformats/go-multihash"
@@ -12,7 +13,7 @@ import (
 
 type WebRelayManager struct {
 	webrelays []string
-	peerID string
+	peerID    string
 }
 
 type EncryptedMessage struct {
@@ -20,7 +21,7 @@ type EncryptedMessage struct {
 	Recipient string `json:"recipient"`
 }
 
-type TypedMessage struct{
+type TypedMessage struct {
 	Type string
 	Data json.RawMessage
 }
@@ -36,7 +37,7 @@ func NewWebRelayManager(webrelays []string, sender string) *WebRelayManager {
 
 func (wrm *WebRelayManager) SendRelayMessage(ciphertext string, recipient string) {
 	encryptedmessage := EncryptedMessage{
-		Message: ciphertext,
+		Message:   ciphertext,
 		Recipient: recipient,
 	}
 
@@ -66,7 +67,7 @@ func (wrm *WebRelayManager) authToWebRelay(server string, msg []byte) {
 	prefix64 := binary.BigEndian.Uint64(prefix)
 
 	// Then shifting
-	shiftedPrefix64 := prefix64>>uint(48)
+	shiftedPrefix64 := prefix64 >> uint(48)
 
 	// Then converting back to a byte array
 	shiftedBytes := make([]byte, 8)
@@ -78,8 +79,8 @@ func (wrm *WebRelayManager) authToWebRelay(server string, msg []byte) {
 
 	// Generate subscribe message
 	subscribeMessage := SubscribeMessage{
-		UserID: wrm.peerID,
-		SubscriptionKey: base58.Encode([]byte(subscriptionKey)),
+		UserID:          wrm.peerID,
+		SubscriptionKey: base58.Encode(subscriptionKey),
 	}
 
 	data, _ := json.Marshal(subscribeMessage)
@@ -113,4 +114,3 @@ func (wrm *WebRelayManager) authToWebRelay(server string, msg []byte) {
 	}
 
 }
-
