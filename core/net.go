@@ -4,16 +4,18 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/OpenBazaar/openbazaar-go/net"
 	"gx/ipfs/QmUadX5EcvrBmxAV9sE7wUWtWSqxns5K84qKJBixmcT1w9/go-datastore"
 	"gx/ipfs/QmYxUdYY9S6yg5tSPVin5GFTvtfsLauVcr7reHDD3dM8xf/go-libp2p-routing"
 	"sync"
 	"time"
 
+	"github.com/OpenBazaar/openbazaar-go/net"
+
 	libp2p "gx/ipfs/QmTW4SdgBWq9GjsBsHeUx8WuGxzhgzAf88UMH2w62PC8yK/go-libp2p-crypto"
 	"gx/ipfs/QmTbxNB1NwDesLmKTscr4udL2tVP7MaxvXnD1D9yX7g3PN/go-cid"
 	"gx/ipfs/QmYVXrKrKHDC9FobgmcmshCDyWwdrfwfanNQN4oxJ9Fk3h/go-libp2p-peer"
 	"gx/ipfs/QmerPMzPk1mJVowm8KgmoknWa4yCYvvugMPsgWmDNUvDLW/go-multihash"
+
 	"github.com/OpenBazaar/openbazaar-go/ipfs"
 
 	"github.com/OpenBazaar/openbazaar-go/pb"
@@ -121,7 +123,7 @@ func (n *OpenBazaarNode) SendOfflineMessage(p peer.ID, k *libp2p.PubKey, m *pb.M
 		return mherr
 	}
 	/* TODO: We are just using a default prefix length for now. Eventually we will want to customize this,
-	  but we will need some way to get the recipient's desired prefix length. Likely will be in profile. */
+	but we will need some way to get the recipient's desired prefix length. Likely will be in profile. */
 	pointer, err := ipfs.NewPointer(mh, DefaultPointerPrefixLength, addr, ciphertext)
 	if err != nil {
 		return err
