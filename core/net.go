@@ -100,7 +100,7 @@ func (n *OpenBazaarNode) SendOfflineMessage(p peer.ID, k *libp2p.PubKey, m *pb.M
 
 	relayciphertext, err := net.Encrypt(*k, messageBytes)
 	if err != nil {
-		fmt.Errorf("Error: %s", err.Error())
+		return fmt.Errorf("Error: %s", err.Error())
 	}
 
 	// Base64 encode
