@@ -480,6 +480,8 @@ func (n *Node) start() error {
 		n.OpenBazaarNode.PointerRepublisher = PR
 		MR.Wait()
 
+		n.OpenBazaarNode.WebRelayManager.ConnectToRelays(n.OpenBazaarNode.Service)
+
 		n.OpenBazaarNode.PublishLock.Unlock()
 		publishUnlocked = true
 		n.OpenBazaarNode.UpdateFollow()
