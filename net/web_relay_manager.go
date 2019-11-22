@@ -124,7 +124,7 @@ func (wrm *WebRelayManager) connectToServer(relay string, sender string) (*webso
 			if err != nil {
 				log.Debugf("Connection to relay has an error: %s", err)
 				log.Debugf("Attempting to reconnect to the relay...")
-				wrm.reconnectToRelay(relay, sender)
+				wrm.reconnectToRelay(relay)
 				break
 			}
 
