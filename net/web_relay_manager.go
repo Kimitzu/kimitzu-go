@@ -187,10 +187,10 @@ func (wrm *WebRelayManager) SendRelayMessage(ciphertext string, recipient string
 	log.Debugf("Sending encrypted relay message: %s", string(outgoing))
 
 	// Transmit the encrypted message to the webrelay
-	wrm.authToWebRelay(wrm.webrelays[0], outgoing)
+	wrm.authToWebRelay(outgoing)
 }
 
-func (wrm *WebRelayManager) authToWebRelay(server string, msg []byte) {
+func (wrm *WebRelayManager) authToWebRelay(msg []byte) {
 	for _, conn := range wrm.connections {
 		if conn != nil {
 			err := conn.WriteMessage(websocket.TextMessage, msg)
