@@ -42,3 +42,7 @@ openbazaar-go*
 
 # macOS
 .DS_Store
+
+# Build files 
+
+openbazaard

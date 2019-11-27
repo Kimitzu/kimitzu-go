@@ -1,8 +1,9 @@
 package migrations
 
 import (
-	"github.com/djali-foundation/djali-go/schema"
 	"testing"
+
+	"github.com/djali-foundation/djali-go/schema"
 )
 
 func TestMigration025(t *testing.T) {

@@ -2,14 +2,15 @@ package migrations_test
 
 import (
 	"encoding/json"
+	"io/ioutil"
+	"os"
+	"testing"
+
 	"github.com/OpenBazaar/jsonpb"
 	"github.com/djali-foundation/djali-go/pb"
 	"github.com/djali-foundation/djali-go/repo/migrations"
 	"github.com/djali-foundation/djali-go/schema"
 	"github.com/djali-foundation/djali-go/test/factory"
-	"io/ioutil"
-	"os"
-	"testing"
 )
 
 func TestMigration029(t *testing.T) {

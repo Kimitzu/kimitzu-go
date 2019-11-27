@@ -3,11 +3,12 @@ package migrations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/ipfs/go-ipfs/core/mock"
 	"io/ioutil"
 	"os"
 	"path"
+
+	"github.com/djali-foundation/djali-go/ipfs"
+	coremock "github.com/ipfs/go-ipfs/core/mock"
 )
 
 // Migration029 will update the hashes of each listing in the listing index with
