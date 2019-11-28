@@ -51,11 +51,11 @@ message Listing {
         string serviceClassification               = 6662;
         
         enum ServiceRateMethod {
-            PER_HOUR          = 0;
-            PER_DAY           = 3;
-            PER_MONTH         = 1;
-            PER_MILESTONE     = 4;
-            FIXED             = 5;
+            FIXED             = 0;
+            PER_HOUR          = 1;
+            PER_DAY           = 2;
+            PER_MONTH         = 3;
+            PER_MILESTONE     = 5;
         }
 
         enum ContractType {

@@ -80,7 +80,7 @@ message Profile {
     }
 
     message Timespan {
-        google.protobuf.Timestamp fr = 1;
+        google.protobuf.Timestamp from = 1;
         google.protobuf.Timestamp to = 2;
     }
     

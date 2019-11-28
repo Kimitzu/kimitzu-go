@@ -1,11 +1,12 @@
 package mobile_test
 
 import (
+	bitswap "gx/ipfs/QmcSPuzpSbVLU6UHU4e5PwZpm4fHbCn5SbNR5ZNL6Mj63G/go-bitswap/network"
+	"testing"
+
 	"github.com/djali-foundation/djali-go/ipfs"
 	"github.com/djali-foundation/djali-go/mobile"
 	"github.com/djali-foundation/djali-go/schema"
-	bitswap "gx/ipfs/QmcSPuzpSbVLU6UHU4e5PwZpm4fHbCn5SbNR5ZNL6Mj63G/go-bitswap/network"
-	"testing"
 )
 
 func TestBitswapProtocolSetCorrectly(t *testing.T) {

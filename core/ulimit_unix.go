@@ -4,6 +4,7 @@ package core
 
 import (
 	"fmt"
+	"runtime"
 	"syscall"
 )
 
@@ -29,6 +30,17 @@ func CheckAndSetUlimit() error {
 
 	// Try updating the limit. If it fails, try using the previous maximum instead
 	// of our new maximum. Not all users have permissions to increase the maximum.
+
+	// Special hax because of the long standing bug within go/c
+	// See more: https://github.com/golang/go/issues/30401
+	if runtime.GOOS == "darwin" && rLimit.Cur > 10240 {
+		// The max file limit is 10240, even though
+		// the max returned by Getrlimit is 1<<63-1.
+		// This is OPEN_MAX in sys/syslimits.h.
+		fmt.Println("Setting on darwin")
+		rLimit.Cur = 4096
+	}
+
 	err = syscall.Setrlimit(syscall.RLIMIT_NOFILE, &rLimit)
 	if err != nil {
 		rLimit.Max = oldMax

@@ -1,9 +1,10 @@
 package core_test
 
 import (
+	"testing"
+
 	"github.com/djali-foundation/djali-go/test"
 	"github.com/djali-foundation/djali-go/test/factory"
-	"testing"
 )
 
 func TestOpenBazaarNode_SetCurrencyOnListings(t *testing.T) {
