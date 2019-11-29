@@ -306,6 +306,13 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	rc := new(pb.RicardianContract)
 	rc.BuyerOrderCompletion = oc
 
+	if hasBuyerRating {
+		err = n.addBuyerRating(bRating)
+		if err != nil {
+			fmt.Println("Buyer rating error!")
+			return err
+		}
+	}
 	rc, err = n.SignOrderCompletion(rc)
 	if err != nil {
 		return err
@@ -317,13 +324,6 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	err = n.SendOrderCompletion(contract.VendorListings[0].VendorID.PeerID, &vendorkey, rc)
 	if err != nil {
 		return err
-	}
-	if hasBuyerRating {
-		err = n.addBuyerRating(bRating)
-		if err != nil {
-			fmt.Println("Buyer rating error!")
-			return err
-		}
 	}
 
 	contract.BuyerOrderCompletion = oc

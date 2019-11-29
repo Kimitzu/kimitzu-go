@@ -28,9 +28,6 @@ func (n *OpenBazaarNode) FulfillOrder(fulfillment *pb.OrderFulfillment, contract
 		return errors.New("slug must be specified when an order contains multiple items")
 	}
 
-	fulfillment.BuyerRating.SourceId = contract.VendorListings[0].VendorID.PeerID // If this fails then there's already something
-	fulfillment.BuyerRating.TargetId = contract.BuyerOrder.BuyerID.PeerID         // wrong with the contract to begin with.
-
 	rc := new(pb.RicardianContract)
 	if contract.BuyerOrder.Payment.Method == pb.Order_Payment_MODERATED {
 		payout := new(pb.OrderFulfillment_Payout)
