@@ -126,6 +126,16 @@ func (n *OpenBazaarNode) FulfillOrder(fulfillment *pb.OrderFulfillment, contract
 		}
 	}
 
+	brm, err := proto.Marshal(fulfillment.BuyerRating)
+	if err != nil {
+		return err
+	}
+	brmSignature, err := n.IpfsNode.PrivateKey.Sign(brm)
+	if err != nil {
+		return err
+	}
+	fulfillment.BuyerRatingSignature = brmSignature
+
 	ser, err := proto.Marshal(metadata)
 	if err != nil {
 		return err
