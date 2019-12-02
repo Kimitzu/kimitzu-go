@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/core"
+	"github.com/kimitzu/kimitzu-go/core"
 	"github.com/ipfs/go-ipfs/core/mock"
 )
 

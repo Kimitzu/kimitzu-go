@@ -6,8 +6,8 @@ import (
 	"os/signal"
 	"path/filepath"
 
-	"github.com/djali-foundation/djali-go/cmd"
-	"github.com/djali-foundation/djali-go/core"
+	"github.com/kimitzu/kimitzu-go/cmd"
+	"github.com/kimitzu/kimitzu-go/core"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"github.com/jessevdk/go-flags"
 	"github.com/op/go-logging"

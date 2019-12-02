@@ -4,8 +4,8 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/ipfs/go-ipfs/core/corehttp"
 	"github.com/op/go-logging"
 )
@@ -33,8 +33,8 @@ func NewGateway(n *core.OpenBazaarNode, authCookie http.Cookie, l net.Listener, 
 	topMux.Handle("/wallet/", jsonAPI)
 	topMux.Handle("/ws", wsAPI)
 
-	topMux.HandleFunc("/djali/info", DjaliInfo(n, authCookie, config))
-	topMux.HandleFunc("/djali/config", DjaliConfig(n, authCookie, config))
+	topMux.HandleFunc("/kimitzu/info", KimitzuInfo(n, authCookie, config))
+	topMux.HandleFunc("/kimitzu/config", KimitzuConfig(n, authCookie, config))
 
 	var (
 		err error

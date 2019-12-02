@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/gorilla/websocket"
 	"github.com/op/go-logging"
 )

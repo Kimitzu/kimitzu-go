@@ -25,7 +25,7 @@ Create a directory to store all your Go projects (e.g. `C:\goprojects`):
 ### Install openbazaar-go
 
 - Install `openbazaar-go`:
-    + Open the command prompt and run: `go get github.com/djali-foundation/djali-go`. This will use git to checkout the source code into `%GOPATH%\src\github.com\OpenBazaar\openbazaar-go`.
+    + Open the command prompt and run: `go get github.com/kimitzu-foundation/kimitzu-go`. This will use git to checkout the source code into `%GOPATH%\src\github.com\OpenBazaar\openbazaar-go`.
 - Checkout an OpenBazaar release:
     + Run `git checkout v0.13.6` to checkout a release version.
     + Note: `go get` leaves the repo pointing at `master` which is a branch used for active development. Running OpenBazaar from `master` is NOT recommended. Check the [release versions](https://github.com/OpenBazaar/openbazaar-go/releases) for the available versions that you use in checkout.

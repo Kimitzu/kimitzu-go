@@ -17,9 +17,9 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
 	"github.com/golang/protobuf/proto"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/op/go-logging"

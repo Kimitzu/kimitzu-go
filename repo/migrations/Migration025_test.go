@@ -3,7 +3,7 @@ package migrations
 import (
 	"testing"
 
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/schema"
 )
 
 func TestMigration025(t *testing.T) {

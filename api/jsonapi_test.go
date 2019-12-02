@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/test"
-	"github.com/djali-foundation/djali-go/test/factory"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/test"
+	"github.com/kimitzu/kimitzu-go/test/factory"
 )
 
 func TestMain(m *testing.M) {

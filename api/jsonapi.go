@@ -37,11 +37,11 @@ import (
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcutil/base58"
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/ipfs/go-ipfs/core/coreapi"
@@ -222,8 +222,8 @@ func SanitizedResponse(w http.ResponseWriter, response string) {
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	// [djali] - Sets Additional Core Requirements for better inter-operation
-	// 		with the Djali Client.
+	// [kimitzu] - Sets Additional Core Requirements for better inter-operation
+	// 		with the Kimitzu Client.
 	// TODO: Preferably move this somewhere else in the future.
 	w.Header().Set("Node-Agent", core.USERAGENT)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -236,8 +236,8 @@ func SanitizedResponseM(w http.ResponseWriter, response string, m proto.Message)
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	// [djali] - Sets Additional Core Requirements for better inter-operation
-	// 		with the Djali Client.
+	// [kimitzu] - Sets Additional Core Requirements for better inter-operation
+	// 		with the Kimitzu Client.
 	// TODO: Preferably move this somewhere else in the future.
 	w.Header().Set("Node-Agent", core.USERAGENT)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -265,10 +265,10 @@ func (i *jsonAPIHandler) POSTProfile(w http.ResponseWriter, r *http.Request) {
 		ErrorResponse(w, http.StatusBadRequest, err.Error())
 		return
 	}
-	// [djali] internal Djali metadata and tags
-	profile.ProfileType = "djali"
+	// [kimitzu] internal Kimitzu metadata and tags
+	profile.ProfileType = "kimitzu"
 	profile.MetaTags = make(map[string]string)
-	profile.MetaTags["DjaliVersion"] = core.DJALI_VERSION
+	profile.MetaTags["KimitzuVersion"] = core.KIMITZU_VERSION
 
 	// Save to file
 	err = i.node.UpdateProfile(profile)
@@ -3462,12 +3462,12 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 		json.Unmarshal(buyerRatingBytes, &buyerRatings)
 	}
 	if indexBytes == nil {
-		djaliresp := core.DjaliRatingResp{}
-		djaliresp.BuyerRatings = buyerRatings.Ratings
-		djaliresp.Count = len(buyerRatings.Ratings)
-		djaliresp.Average = djaliresp.ComputeAverage()
+		kimitzuresp := core.KimitzuRatingResp{}
+		kimitzuresp.BuyerRatings = buyerRatings.Ratings
+		kimitzuresp.Count = len(buyerRatings.Ratings)
+		kimitzuresp.Average = kimitzuresp.ComputeAverage()
 		rating := new(core.SavedRating)
-		rating.Djali = djaliresp
+		rating.Kimitzu = kimitzuresp
 		rating.Ratings = []string{}
 		ret, err := json.MarshalIndent(rating, "", "    ")
 		if err != nil {
@@ -3484,15 +3484,15 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	djaliresp := core.DjaliRatingResp{}
-	djaliresp.BuyerRatings = buyerRatings.Ratings
-	djaliresp.Count = len(buyerRatings.Ratings)
-	djaliresp.Average = djaliresp.ComputeAverage()
+	kimitzuresp := core.KimitzuRatingResp{}
+	kimitzuresp.BuyerRatings = buyerRatings.Ratings
+	kimitzuresp.Count = len(buyerRatings.Ratings)
+	kimitzuresp.Average = kimitzuresp.ComputeAverage()
 
 	if slug != "" {
 		// Other peer ID Rating
 		rating := new(core.SavedRating)
-		rating.Djali = djaliresp
+		rating.Kimitzu = kimitzuresp
 		for _, r := range ratingList {
 			if r.Slug == slug {
 				rating = &r
@@ -3511,10 +3511,10 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 			Count   int                  `json:"count"`
 			Average float32              `json:"average"`
 			Ratings []string             `json:"ratings"`
-			Djali   core.DjaliRatingResp `json:"djali"`
+			Kimitzu   core.KimitzuRatingResp `json:"kimitzu"`
 		}
 		ratingRet := new(resp)
-		ratingRet.Djali = djaliresp
+		ratingRet.Kimitzu = kimitzuresp
 		total := float32(0)
 		count := 0
 		for _, r := range ratingList {

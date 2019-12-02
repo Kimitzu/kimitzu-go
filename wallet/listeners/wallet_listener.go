@@ -1,7 +1,7 @@
 package bitcoin
 
 import (
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 	"github.com/OpenBazaar/wallet-interface"
 )
 

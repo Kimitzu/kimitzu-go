@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/core"
+	"github.com/kimitzu/kimitzu-go/core"
 )
 
 func TestEmojiToHTML(t *testing.T) {

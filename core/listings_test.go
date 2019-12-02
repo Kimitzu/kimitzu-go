@@ -3,8 +3,8 @@ package core_test
 import (
 	"testing"
 
-	"github.com/djali-foundation/djali-go/test"
-	"github.com/djali-foundation/djali-go/test/factory"
+	"github.com/kimitzu/kimitzu-go/test"
+	"github.com/kimitzu/kimitzu-go/test/factory"
 )
 
 func TestOpenBazaarNode_SetCurrencyOnListings(t *testing.T) {

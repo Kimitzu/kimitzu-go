@@ -7,8 +7,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcd/wire"

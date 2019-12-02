@@ -7,7 +7,7 @@ import (
 	peer "gx/ipfs/QmYVXrKrKHDC9FobgmcmshCDyWwdrfwfanNQN4oxJ9Fk3h/go-libp2p-peer"
 	"time"
 
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 var (

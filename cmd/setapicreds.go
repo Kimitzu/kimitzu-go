@@ -9,14 +9,14 @@ import (
 	"io/ioutil"
 	"path"
 
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 
 	"os"
 	"strings"
 	"syscall"
 
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

@@ -48,22 +48,22 @@ Go should now be ready.
 
 Checkout a copy of the source:
 ```
-go get github.com/djali-foundation/djali-go
+go get github.com/kimitzu-foundation/kimitzu-go
 ```
 
 
-It will use git to checkout the source code into `$GOPATH/src/github.com/djali-foundation/djali-go`
+It will use git to checkout the source code into `$GOPATH/src/github.com/kimitzu-foundation/kimitzu-go`
 
 Checkout a release version:
 ```
 git checkout v0.13.6
 ```
 
-Note: `go get` leaves the repo pointing at `master` which is a branch used for active development. Running OpenBazaar from `master` is NOT recommended. Check the [release versions](https://github.com/djali-foundation/djali-go/releases) for the available versions that you use in checkout.
+Note: `go get` leaves the repo pointing at `master` which is a branch used for active development. Running OpenBazaar from `master` is NOT recommended. Check the [release versions](https://github.com/kimitzu-foundation/kimitzu-go/releases) for the available versions that you use in checkout.
 
 To compile and run the source:
 ```
-cd $GOPATH/src/github.com/djali-foundation/djali-go
+cd $GOPATH/src/github.com/kimitzu-foundation/kimitzu-go
 go run openbazaard.go start
 ```
 NOTE: If you have Xcode installed you may get the response `signal: killed`. If you do try running the following instead.
@@ -76,12 +76,12 @@ NOTE FOR NEW GOLANG HACKERS:
 
 In most projects you usually perform a `git clone` of the repository in order to start hacking. 
 
-With `openbazaar-go` There's no need to manually `git clone` the project, this is done for you when you issue the `go get github.com/djali-foundation/djali-go` command, doing a manual `git clone` will only give you a repository that's missing a lot of recursive dependencies and building headaches.
+With `openbazaar-go` There's no need to manually `git clone` the project, this is done for you when you issue the `go get github.com/kimitzu-foundation/kimitzu-go` command, doing a manual `git clone` will only give you a repository that's missing a lot of recursive dependencies and building headaches.
 
-If you are used to having all your other projects in some other place on disk, just make a symlink from `$GOPATH/src/github.com/djali-foundation/djali-go` into your usual workspace folder.
+If you are used to having all your other projects in some other place on disk, just make a symlink from `$GOPATH/src/github.com/kimitzu-foundation/kimitzu-go` into your usual workspace folder.
 
-To start hacking make sure to add your git remote into the `$GOPATH/src/github.com/djali-foundation/djali-go` folder with:
+To start hacking make sure to add your git remote into the `$GOPATH/src/github.com/kimitzu-foundation/kimitzu-go` folder with:
 ```
-cd $GOPATH/src/github.com/djali-foundation/djali-go
+cd $GOPATH/src/github.com/kimitzu-foundation/kimitzu-go
 git remote add myusername git@github.com:myusername/openbazaar-go.git
 ```

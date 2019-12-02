@@ -1,7 +1,7 @@
 # Build stage - Use a full build environment to create a static binary
 FROM golang:1.11
-COPY . /go/src/github.com/djali-foundation/djali-go
-RUN go build --ldflags '-extldflags "-static"' -o /opt/openbazaard /go/src/github.com/djali-foundation/djali-go
+COPY . /go/src/github.com/kimitzu-foundation/kimitzu-go
+RUN go build --ldflags '-extldflags "-static"' -o /opt/openbazaard /go/src/github.com/kimitzu-foundation/kimitzu-go
 
 # Final state - Create image containing nothing but the openbazaard binary and
 # some base settings

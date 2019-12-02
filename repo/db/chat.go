@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 type ChatDB struct {

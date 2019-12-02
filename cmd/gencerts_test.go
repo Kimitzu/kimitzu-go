@@ -8,8 +8,8 @@ import (
 	"path"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/cmd"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/cmd"
+	"github.com/kimitzu/kimitzu-go/schema"
 )
 
 func buildCertDirectory() (string, func(), error) {

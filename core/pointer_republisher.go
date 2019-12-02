@@ -1,7 +1,7 @@
 package core
 
 import (
-	"github.com/djali-foundation/djali-go/net/repointer"
+	"github.com/kimitzu/kimitzu-go/net/repointer"
 )
 
 // StartPointerRepublisher - setup republisher for IPNS

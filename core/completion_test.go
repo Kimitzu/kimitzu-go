@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/test/factory"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/test/factory"
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/golang/protobuf/ptypes"
 )

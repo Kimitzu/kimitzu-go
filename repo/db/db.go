@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/OpenBazaar/wallet-interface"
 	_ "github.com/mutecomm/go-sqlcipher"
 	"github.com/op/go-logging"

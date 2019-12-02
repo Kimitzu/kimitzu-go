@@ -12,13 +12,13 @@ import (
 	peer "gx/ipfs/QmYVXrKrKHDC9FobgmcmshCDyWwdrfwfanNQN4oxJ9Fk3h/go-libp2p-peer"
 	blocks "gx/ipfs/QmYYLnAzR28nAQ4U5MFniLprnktu6eTFKibeNt96V21EZK/go-block-format"
 
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/net"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/net"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
 
-	u "github.com/djali-foundation/djali-go/util"
+	u "github.com/kimitzu/kimitzu-go/util"
 
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"

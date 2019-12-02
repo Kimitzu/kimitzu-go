@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 var SettingsNotSetError = errors.New("settings not set")

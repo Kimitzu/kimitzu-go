@@ -7,10 +7,10 @@ import (
 
 	"github.com/golang/protobuf/ptypes/any"
 
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/repo/db"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo/db"
+	"github.com/kimitzu/kimitzu-go/schema"
 )
 
 func buildNewMessageStore() (repo.MessageStore, func(), error) {

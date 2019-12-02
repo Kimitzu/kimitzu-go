@@ -6,8 +6,8 @@ import (
 	"net/smtp"
 	"strings"
 
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 // Notification manager intercepts data form 'inChan' which is embedded

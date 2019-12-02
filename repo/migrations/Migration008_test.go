@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/djali-foundation/djali-go/repo/migrations"
-	"github.com/djali-foundation/djali-go/schema"
-	"github.com/djali-foundation/djali-go/test/factory"
+	"github.com/kimitzu/kimitzu-go/repo/migrations"
+	"github.com/kimitzu/kimitzu-go/schema"
+	"github.com/kimitzu/kimitzu-go/test/factory"
 )
 
 func TestMigration008(t *testing.T) {

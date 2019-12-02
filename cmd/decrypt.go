@@ -9,8 +9,8 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/repo/db"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo/db"
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"golang.org/x/crypto/ssh/terminal"

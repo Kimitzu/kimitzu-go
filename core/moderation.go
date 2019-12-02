@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/pb"
 	"golang.org/x/net/context"
 )
 

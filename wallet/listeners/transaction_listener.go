@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/multiwallet"
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
 	"github.com/OpenBazaar/wallet-interface"
 	btc "github.com/btcsuite/btcutil"
 	"github.com/golang/protobuf/proto"

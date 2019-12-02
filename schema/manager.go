@@ -15,7 +15,7 @@ import (
 
 	config "gx/ipfs/QmUAuYuiafnJRZxDDX7MuruMNsicYNuyub5vUeAcupUBNs/go-ipfs-config"
 
-	"github.com/djali-foundation/djali-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/ipfs"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	_ "github.com/mutecomm/go-sqlcipher"
 	"github.com/tyler-smith/go-bip39"
@@ -203,7 +203,7 @@ func (m *openbazaarSchemaManager) buildIPFSRootDirectories() error {
 	if err := os.MkdirAll(m.DataPathJoin("root", "ratings"), os.ModePerm); err != nil {
 		return err
 	}
-	// Djali buyer ratings
+	// Kimitzu buyer ratings
 	if err := os.MkdirAll(m.DataPathJoin("root", "entityratings"), os.ModePerm); err != nil {
 		return err
 	}

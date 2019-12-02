@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 type FollowingDB struct {

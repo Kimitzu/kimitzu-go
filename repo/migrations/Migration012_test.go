@@ -15,8 +15,8 @@ import (
 	"testing"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo/migrations"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo/migrations"
 	"github.com/golang/protobuf/proto"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 )

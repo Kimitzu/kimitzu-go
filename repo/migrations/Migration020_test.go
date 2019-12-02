@@ -14,10 +14,10 @@ import (
 
 	"gx/ipfs/QmddjPSGZb3ieihSseFeCfVRpZzcqczPNsD2DvarSwnjJB/gogo-protobuf/proto"
 
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/repo/migrations"
-	dhtpb "github.com/djali-foundation/djali-go/repo/migrations/helpers/Migration020"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/repo/migrations"
+	dhtpb "github.com/kimitzu/kimitzu-go/repo/migrations/helpers/Migration020"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 )
 

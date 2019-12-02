@@ -15,9 +15,9 @@ import (
 	"github.com/OpenBazaar/jsonpb"
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 )
@@ -49,14 +49,14 @@ type RatingData struct {
 	Anonymous       bool   `json:"anonymous"`
 }
 
-// DjaliRatingResp - additional ratings
-type DjaliRatingResp struct {
+// KimitzuRatingResp - additional ratings
+type KimitzuRatingResp struct {
 	Count        int                `json:"count"`
 	Average      int                `json:"average"`
 	BuyerRatings []*pb.EntityRating `json:"buyerRatings"`
 }
 
-func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) float64 {
+func (r *KimitzuRatingResp) computeFields(rating *pb.EntityRating) float64 {
 	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
 	total := float64(0)
 	sumWeight := 0
@@ -79,7 +79,7 @@ func (r *DjaliRatingResp) computeFields(rating *pb.EntityRating) float64 {
 }
 
 // ComputeAverage - Computes the average rating
-func (r *DjaliRatingResp) ComputeAverage() int {
+func (r *KimitzuRatingResp) ComputeAverage() int {
 	// ((rating[0]['weight'] / sumrating) * 100) * (rating[0]['score'] / 5)
 	total := float64(0)
 	if len(r.BuyerRatings) == 0 {
@@ -102,7 +102,7 @@ type SavedRating struct {
 	Count   int             `json:"count"`
 	Average float32         `json:"average"`
 	Ratings []string        `json:"ratings"`
-	Djali   DjaliRatingResp `json:"djali"`
+	Kimitzu   KimitzuRatingResp `json:"kimitzu"`
 }
 
 // CompleteOrder - complete the order

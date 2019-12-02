@@ -3,9 +3,9 @@ package core_test
 import (
 	"testing"
 
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/test"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/test"
 	"github.com/golang/protobuf/proto"
 )
 

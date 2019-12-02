@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/djali-foundation/djali-go",
+	"ImportPath": "github.com/kimitzu-foundation/kimitzu-go",
 	"GoVersion": "go1.11",
 	"GodepVersion": "v80",
 	"Deps": [

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/pb"
 )
 
 type TransactionQuery struct {

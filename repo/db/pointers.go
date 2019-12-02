@@ -12,8 +12,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 type PointersDB struct {

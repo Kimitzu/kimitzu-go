@@ -7,7 +7,7 @@ import (
 	"path"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/repo/migrations"
+	"github.com/kimitzu/kimitzu-go/repo/migrations"
 )
 
 func TestMigration011(t *testing.T) {

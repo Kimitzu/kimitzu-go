@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"path"
 
-	"github.com/djali-foundation/djali-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/ipfs"
 
 	u "gx/ipfs/QmNohiVssaPw3KVLZik59DBVGTSm2dGvYT9eoXt5DQ36Yz/go-ipfs-util"
 	ci "gx/ipfs/QmTW4SdgBWq9GjsBsHeUx8WuGxzhgzAf88UMH2w62PC8yK/go-libp2p-crypto"
@@ -16,7 +16,7 @@ import (
 	"gx/ipfs/QmddjPSGZb3ieihSseFeCfVRpZzcqczPNsD2DvarSwnjJB/gogo-protobuf/proto"
 	"gx/ipfs/QmfVj3x4D6Jkq9SEoi5n2NmoUomLwoeiwnYz2KQa15wRw6/base32"
 
-	dhtpb "github.com/djali-foundation/djali-go/repo/migrations/helpers/Migration020"
+	dhtpb "github.com/kimitzu/kimitzu-go/repo/migrations/helpers/Migration020"
 	"github.com/ipfs/go-ipfs/repo"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 )

@@ -3,7 +3,7 @@ package factory
 import (
 	"time"
 
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 func NewAPITime(t time.Time) *repo.APITime {

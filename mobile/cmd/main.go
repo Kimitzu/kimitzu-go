@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/djali-foundation/djali-go/mobile"
+	"github.com/kimitzu/kimitzu-go/mobile"
 	"github.com/jessevdk/go-flags"
 )
 

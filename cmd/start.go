@@ -32,21 +32,21 @@ import (
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcutil/base58"
 	"github.com/btcsuite/btcutil/hdkeychain"
-	"github.com/djali-foundation/djali-go/api"
-	"github.com/djali-foundation/djali-go/core"
-	"github.com/djali-foundation/djali-go/ipfs"
-	obnet "github.com/djali-foundation/djali-go/net"
-	"github.com/djali-foundation/djali-go/net/service"
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/repo/db"
-	"github.com/djali-foundation/djali-go/repo/migrations"
-	"github.com/djali-foundation/djali-go/schema"
-	sto "github.com/djali-foundation/djali-go/storage"
-	"github.com/djali-foundation/djali-go/storage/dropbox"
-	"github.com/djali-foundation/djali-go/storage/selfhosted"
-	"github.com/djali-foundation/djali-go/wallet"
-	lis "github.com/djali-foundation/djali-go/wallet/listeners"
-	"github.com/djali-foundation/djali-go/wallet/resync"
+	"github.com/kimitzu/kimitzu-go/api"
+	"github.com/kimitzu/kimitzu-go/core"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	obnet "github.com/kimitzu/kimitzu-go/net"
+	"github.com/kimitzu/kimitzu-go/net/service"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo/db"
+	"github.com/kimitzu/kimitzu-go/repo/migrations"
+	"github.com/kimitzu/kimitzu-go/schema"
+	sto "github.com/kimitzu/kimitzu-go/storage"
+	"github.com/kimitzu/kimitzu-go/storage/dropbox"
+	"github.com/kimitzu/kimitzu-go/storage/selfhosted"
+	"github.com/kimitzu/kimitzu-go/wallet"
+	lis "github.com/kimitzu/kimitzu-go/wallet/listeners"
+	"github.com/kimitzu/kimitzu-go/wallet/resync"
 	"github.com/fatih/color"
 	"github.com/ipfs/go-ipfs/commands"
 	ipfscore "github.com/ipfs/go-ipfs/core"
@@ -678,7 +678,7 @@ func (x *Start) Execute(args []string) error {
 		}
 		core.Node.Service = service.New(core.Node, sqliteDB)
 		core.Node.Service.WaitForReady()
-		log.Info("Djali(OpenBazaar) Service Ready")
+		log.Info("Kimitzu(OpenBazaar) Service Ready")
 
 		// Start OnlineStatusBroadcaster
 		go onlineStatusBroadcaster(core.Node)
@@ -1042,7 +1042,7 @@ func printSplashScreen(verbose bool, testnet bool) {
 	if testnet {
 		fmt.Println("Running in Testnet")
 	}
-	fmt.Println("Djali(OpenBazaar) Server v." + core.VERSION)
+	fmt.Println("Kimitzu(OpenBazaar) Server v." + core.VERSION)
 	if !verbose {
 		fmt.Println("[Press Ctrl+C to exit]")
 	}

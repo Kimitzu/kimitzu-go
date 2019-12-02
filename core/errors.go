@@ -9,7 +9,7 @@ import (
 
 	peer "gx/ipfs/QmYVXrKrKHDC9FobgmcmshCDyWwdrfwfanNQN4oxJ9Fk3h/go-libp2p-peer"
 
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/pb"
 	"github.com/golang/protobuf/ptypes"
 )
 

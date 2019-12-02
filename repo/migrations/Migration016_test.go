@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/repo/migrations"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/repo/migrations"
+	"github.com/kimitzu/kimitzu-go/schema"
 )
 
 const preMigration016Config = `{

@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/test/factory"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/test/factory"
 )
 
 func TestCurrencyDefinitionsAreEqual(t *testing.T) {

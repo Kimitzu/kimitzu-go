@@ -3,7 +3,7 @@ package db
 import (
 	"testing"
 
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/pb"
 )
 
 func Test_filterQuery(t *testing.T) {

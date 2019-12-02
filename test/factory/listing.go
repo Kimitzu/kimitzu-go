@@ -1,7 +1,7 @@
 package factory
 
 import (
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/pb"
 	"github.com/golang/protobuf/ptypes/timestamp"
 )
 

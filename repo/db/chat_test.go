@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/repo/db"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo/db"
+	"github.com/kimitzu/kimitzu-go/schema"
 )
 
 func buildNewChatStore() (repo.ChatStore, func(), error) {
@@ -350,7 +350,7 @@ func TestChatDB_MarkAsRead(t *testing.T) {
 	}
 }
 
-// https://github.com/djali-foundation/djali-go/issues/1041
+// https://github.com/kimitzu-foundation/kimitzu-go/issues/1041
 func TestChatDB_MarkAsRead_Issue1041(t *testing.T) {
 	var chdb, teardown, err = buildNewChatStore()
 	if err != nil {

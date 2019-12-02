@@ -19,12 +19,12 @@ import (
 
 	"github.com/OpenBazaar/multiwallet"
 	"github.com/btcsuite/btcutil/hdkeychain"
-	"github.com/djali-foundation/djali-go/ipfs"
-	"github.com/djali-foundation/djali-go/net"
-	rep "github.com/djali-foundation/djali-go/net/repointer"
-	ret "github.com/djali-foundation/djali-go/net/retriever"
-	"github.com/djali-foundation/djali-go/repo"
-	sto "github.com/djali-foundation/djali-go/storage"
+	"github.com/kimitzu/kimitzu-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/net"
+	rep "github.com/kimitzu/kimitzu-go/net/repointer"
+	ret "github.com/kimitzu/kimitzu-go/net/retriever"
+	"github.com/kimitzu/kimitzu-go/repo"
+	sto "github.com/kimitzu/kimitzu-go/storage"
 	"github.com/gosimple/slug"
 	"github.com/ipfs/go-ipfs/core"
 	logging "github.com/op/go-logging"
@@ -33,13 +33,13 @@ import (
 )
 
 const (
-	// DJALI_VERSION - Djali Development Version
-	DJALI_VERSION = "0.0.1-dev"
+	// KIMITZU_VERSION - Kimitzu Development Version
+	KIMITZU_VERSION = "0.0.1-dev"
 	// VERSION - current version
 	VERSION = "0.13.6"
 	// USERAGENT - user-agent header string
-	// Useragent for Djali Nodes would be "openbazaar-djali-go:0.13.3,0.0.1-dev"
-	USERAGENT = "/openbazaar-djali-go:" + VERSION + "," + DJALI_VERSION + "/"
+	// Useragent for Kimitzu Nodes would be "openbazaar-kimitzu-go:0.13.3,0.0.1-dev"
+	USERAGENT = "/openbazaar-kimitzu-go:" + VERSION + "," + KIMITZU_VERSION + "/"
 )
 
 var log = logging.MustGetLogger("core")

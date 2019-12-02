@@ -8,10 +8,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/schema"
 
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/test/factory"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/test/factory"
 	"github.com/ipfs/go-ipfs/core/mock"
 )
 

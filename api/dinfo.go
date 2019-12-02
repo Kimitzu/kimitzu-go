@@ -10,12 +10,12 @@ import (
 	"path"
 	"strings"
 
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
 
 	"os"
 
-	"github.com/djali-foundation/djali-go/core"
+	"github.com/kimitzu/kimitzu-go/core"
 )
 
 func ChangeAPICredentials(repoPath, username, password string, authenticated bool) error {
@@ -79,8 +79,8 @@ func ChangeAPICredentials(repoPath, username, password string, authenticated boo
 
 }
 
-// DjaliInfo - returns the essential information such as repository path
-func DjaliInfo(node *core.OpenBazaarNode, cookie http.Cookie, config schema.APIConfig) func(http.ResponseWriter, *http.Request) {
+// KimitzuInfo - returns the essential information such as repository path
+func KimitzuInfo(node *core.OpenBazaarNode, cookie http.Cookie, config schema.APIConfig) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !strings.HasPrefix(r.RemoteAddr, "127.0.0.1") {
 			http.Error(w, fmt.Sprintf(`{"error": "Unauthorized", "origin": "%v"}`, r.RemoteAddr), 401)
@@ -104,8 +104,8 @@ type Config struct {
 	Authenticated bool   `json:"authenticated"`
 }
 
-// DjaliConfig - changes authentication // POTENTIALLY UNSAFE, IT'S A HACK FOR THE TIME BEING.
-func DjaliConfig(node *core.OpenBazaarNode, cookie http.Cookie, config schema.APIConfig) func(http.ResponseWriter, *http.Request) {
+// KimitzuConfig - changes authentication // POTENTIALLY UNSAFE, IT'S A HACK FOR THE TIME BEING.
+func KimitzuConfig(node *core.OpenBazaarNode, cookie http.Cookie, config schema.APIConfig) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !strings.HasPrefix(r.RemoteAddr, "127.0.0.1") {
 			http.Error(w, fmt.Sprintf(`{"error": "Unauthorized", "origin": "%v"}`, r.RemoteAddr), 401)

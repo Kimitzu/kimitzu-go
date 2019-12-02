@@ -3,8 +3,8 @@ package repo_test
 import (
 	"testing"
 
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/test/factory"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/test/factory"
 )
 
 func TestSaleRecordIsDisputeable(t *testing.T) {

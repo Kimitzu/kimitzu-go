@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/djali-foundation/djali-go/repo/migrations"
+	"github.com/kimitzu/kimitzu-go/repo/migrations"
 )
 
 type Migration interface {

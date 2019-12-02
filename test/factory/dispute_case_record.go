@@ -3,8 +3,8 @@ package factory
 import (
 	"time"
 
-	"github.com/djali-foundation/djali-go/pb"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/pb"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 func NewDisputeCaseRecord() *repo.DisputeCaseRecord {

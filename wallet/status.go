@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/multiwallet"
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 type StatusUpdater struct {

@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/schema"
 )
 
 // NewAPIConfig returns a new config object for the API tests

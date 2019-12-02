@@ -3,7 +3,7 @@ package net
 import (
 	"testing"
 
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/pb"
 )
 
 // TestEnsureNoOmissionsInMessageProcessingOrder ensures that

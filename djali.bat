@@ -4,7 +4,7 @@ goto %1
 goto end
 
 :clrp
-echo # This will delete "%userprofile%\openbazaar" prior to starting Djali.
+echo # This will delete "%userprofile%\openbazaar" prior to starting Kimitzu.
 set /p conf="# Continue?[y/N]: "
 
 if /i %conf%==y goto delete

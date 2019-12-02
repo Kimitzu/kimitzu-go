@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/djali-foundation/djali-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo"
 )
 
 func TestDataIsUnmarshalable(t *testing.T) {

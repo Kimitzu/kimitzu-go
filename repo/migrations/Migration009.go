@@ -8,7 +8,7 @@ import (
 	"path"
 
 	"github.com/OpenBazaar/jsonpb"
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/pb"
 	_ "github.com/mutecomm/go-sqlcipher"
 )
 

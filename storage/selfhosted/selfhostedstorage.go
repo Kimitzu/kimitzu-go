@@ -11,7 +11,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/djali-foundation/djali-go/ipfs"
+	"github.com/kimitzu/kimitzu-go/ipfs"
 	"github.com/ipfs/go-ipfs/core"
 )
 

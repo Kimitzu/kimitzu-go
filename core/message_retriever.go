@@ -1,7 +1,7 @@
 package core
 
 import (
-	"github.com/djali-foundation/djali-go/net/retriever"
+	"github.com/kimitzu/kimitzu-go/net/retriever"
 )
 
 // StartMessageRetriever will collect the required options from the

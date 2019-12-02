@@ -1,6 +1,6 @@
-﻿# djali-go
+﻿# kimitzu-go
 ![banner](https://i.imgur.com/iOnXDXK.png)
-Djali Server Daemon in Go forked from OpenBazaar
+Kimitzu Server Daemon in Go forked from OpenBazaar
 
 This repository contains the OpenBazaar server daemon which handles the heavy lifting for the [OpenBazaar](https://openbazaar.org/) desktop application. The server combines several technologies: A modified [IPFS](https://ipfs.io) node, which itself combines ideas from Git, BitTorrent, and Kademlia. A lightweight wallet for interacting with several cryptocurrency networks. And a JSON API which can be used by a user interface to control the node and browse the network. Find the user interface for the server at [github.com/OpenBazaar/openbazaar-desktop](https://github.com/OpenBazaar/openbazaar-desktop).
 
@@ -24,11 +24,11 @@ A typical install of OpenBazaar contains a bundle of the server daemon and user 
 
 ### Install Pre-built Packages
 
-The easiest way to run the server is to download a pre-built binary. You can find binaries of our latest release for each operating system [here](https://github.com/djali-foundation/djali-go/releases/).
+The easiest way to run the server is to download a pre-built binary. You can find binaries of our latest release for each operating system [here](https://github.com/kimitzu-foundation/kimitzu-go/releases/).
 
 ### Build from Source
 
-To build from source you will need to have Go installed and properly configured. Detailed instructions for installing Go and openbazaar-go on each operating system can be found in the [docs package](https://github.com/djali-foundation/djali-go/tree/master/docs).
+To build from source you will need to have Go installed and properly configured. Detailed instructions for installing Go and openbazaar-go on each operating system can be found in the [docs package](https://github.com/kimitzu-foundation/kimitzu-go/tree/master/docs).
 
 ## Dependency Management
 
@@ -40,7 +40,7 @@ We are using a [fork](https://github.com/OpenBazaar/go-ipfs) of go-ipfs in the d
 
 ## Updating
 
-You can either pull in remote changes as normal or run `go get -u github.com/djali-foundation/djali-go`.
+You can either pull in remote changes as normal or run `go get -u github.com/kimitzu-foundation/kimitzu-go`.
 
 ## Usage
 
@@ -97,7 +97,7 @@ Documentation of the OpenBazaar protocol has not been formalized yet. If you wou
 
 ## Contributing
 
-Contributions are definitely welcome! Please read the Contributing [Guidelines](https://github.com/djali-foundation/djali-go/blob/master/CONTRIBUTING.md) before starting.
+Contributions are definitely welcome! Please read the Contributing [Guidelines](https://github.com/kimitzu-foundation/kimitzu-go/blob/master/CONTRIBUTING.md) before starting.
 
 ## License
-[MIT](https://github.com/djali-foundation/djali-go/blob/master/LICENSE).
+[MIT](https://github.com/kimitzu-foundation/kimitzu-go/blob/master/LICENSE).

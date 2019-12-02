@@ -5,9 +5,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/djali-foundation/djali-go/repo"
-	"github.com/djali-foundation/djali-go/repo/db"
-	"github.com/djali-foundation/djali-go/schema"
+	"github.com/kimitzu/kimitzu-go/repo"
+	"github.com/kimitzu/kimitzu-go/repo/db"
+	"github.com/kimitzu/kimitzu-go/schema"
 )
 
 func buildNewOfflineMessageStore() (repo.OfflineMessageStore, func(), error) {

@@ -3,7 +3,7 @@ package repo
 import (
 	"time"
 
-	"github.com/djali-foundation/djali-go/pb"
+	"github.com/kimitzu/kimitzu-go/pb"
 )
 
 var (
