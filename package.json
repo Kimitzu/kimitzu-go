@@ -1,11 +1,12 @@
 {
-  "name": "openbazaar-go",
-  "author": "OB1 Company",
-  "version": "0.13.6",
+  "name": "kimitzu-ob-go",
+  "author": "Kimitzu Foundation",
+  "version": "0.1.0",
+  "ob-version": "0.13.6",
   "language": "english",
   "license": "",
   "bugs": {
-    "url": "https://github.com/djali-foundation/djali-go/issues/new"
+    "url": "https://github.com/Kimitzu/kimitzu-go/issues/new"
   },
   "gxVersion": "0.11.0"
 }
