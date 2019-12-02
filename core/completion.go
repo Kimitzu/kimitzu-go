@@ -119,7 +119,6 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 	if vofCount != 0 {
 		bRating = contract.VendorOrderFulfillment[vofCount-1].BuyerRating
 		if bRating != nil {
-			bRating.OrderId = orderID
 			hasBuyerRating = true
 		}
 	}
@@ -165,9 +164,6 @@ func (n *OpenBazaarNode) CompleteOrder(orderRatings *OrderRatings, contract *pb.
 			for _, fulfillment := range contract.VendorOrderFulfillment {
 				if fulfillment.RatingSignature.Metadata.ListingSlug == r.Slug {
 					rs = fulfillment.RatingSignature
-					if hasBuyerRating {
-						bRating.Slug = r.Slug
-					}
 					break
 				}
 			}
@@ -604,7 +600,6 @@ func (n *OpenBazaarNode) addBuyerRating(rating *pb.EntityRating) error {
 		}
 	}()
 
-	rating.Timestamp = time.Now().Format(time.RFC3339Nano)
 	ratings.Ratings = append(ratings.Ratings, rating)
 
 	j, jerr := json.MarshalIndent(ratings, "", "    ")

@@ -235,11 +235,11 @@ message RatingSignature {
     bytes signature              = 2;
 
     message TransactionMetadata {
-        string listingSlug   = 1;
-        bytes  ratingKey     = 2;
-        bytes  moderatorKey  = 3; // Only if moderated
-        string listingTitle  = 4;
-        Image  thumbnail     = 5;
+        string listingSlug          = 1;
+        bytes  ratingKey            = 2;
+        bytes  moderatorKey         = 3; // Only if moderated
+        string listingTitle         = 4;
+        Image  thumbnail            = 5;
 
         message Image {
                 string tiny     = 1;
@@ -280,6 +280,7 @@ message OrderFulfillment {
     repeated CryptocurrencyDelivery cryptocurrencyDelivery = 9;
 
     EntityRating buyerRating              = 6660;
+    bytes buyerRatingSignature            = 6661;
 
     message PhysicalDelivery {
         string shipper            = 1;
@@ -309,10 +310,7 @@ message EntityRatingStore {
 
 message EntityRating {
     string comment               = 1;
-    string slug                  = 2;
-    string orderId               = 3;
-    repeated RatingFields fields = 4;
-    string timestamp = 5;
+    repeated RatingFields fields = 2;
 
     message RatingFields {
         RatingType type = 1;
