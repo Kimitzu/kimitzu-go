@@ -32,6 +32,11 @@ import (
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcutil/base58"
 	"github.com/btcsuite/btcutil/hdkeychain"
+	"github.com/fatih/color"
+	"github.com/ipfs/go-ipfs/commands"
+	ipfscore "github.com/ipfs/go-ipfs/core"
+	"github.com/ipfs/go-ipfs/core/corehttp"
+	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"github.com/kimitzu/kimitzu-go/api"
 	"github.com/kimitzu/kimitzu-go/core"
 	"github.com/kimitzu/kimitzu-go/ipfs"
@@ -47,11 +52,6 @@ import (
 	"github.com/kimitzu/kimitzu-go/wallet"
 	lis "github.com/kimitzu/kimitzu-go/wallet/listeners"
 	"github.com/kimitzu/kimitzu-go/wallet/resync"
-	"github.com/fatih/color"
-	"github.com/ipfs/go-ipfs/commands"
-	ipfscore "github.com/ipfs/go-ipfs/core"
-	"github.com/ipfs/go-ipfs/core/corehttp"
-	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"github.com/natefinch/lumberjack"
 	"github.com/op/go-logging"
 	"github.com/tyler-smith/go-bip39"
@@ -681,7 +681,7 @@ func (x *Start) Execute(args []string) error {
 		log.Info("Kimitzu(OpenBazaar) Service Ready")
 
 		// Start OnlineStatusBroadcaster
-		go onlineStatusBroadcaster(core.Node)
+		// go onlineStatusBroadcaster(core.Node)
 
 		core.Node.StartMessageRetriever()
 		core.Node.StartPointerRepublisher()
