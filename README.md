@@ -1,5 +1,4 @@
 ﻿# kimitzu-go
-![banner](https://i.imgur.com/iOnXDXK.png)
 Kimitzu Server Daemon in Go forked from OpenBazaar
 
 This repository contains the OpenBazaar server daemon which handles the heavy lifting for the [OpenBazaar](https://openbazaar.org/) desktop application. The server combines several technologies: A modified [IPFS](https://ipfs.io) node, which itself combines ideas from Git, BitTorrent, and Kademlia. A lightweight wallet for interacting with several cryptocurrency networks. And a JSON API which can be used by a user interface to control the node and browse the network. Find the user interface for the server at [github.com/OpenBazaar/openbazaar-desktop](https://github.com/OpenBazaar/openbazaar-desktop).
