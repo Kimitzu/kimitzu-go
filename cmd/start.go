@@ -724,7 +724,7 @@ func onlineStatusBroadcaster(n *core.OpenBazaarNode) {
 		return
 	}
 
-	interval := settings.OnlineBroadcastInterval
+	interval := *settings.OnlineBroadcastInterval
 	if interval == -1 {
 		log.Info("Disabled interval, stopping Online Broadcaster...")
 		return

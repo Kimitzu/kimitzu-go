@@ -5,21 +5,22 @@ import (
 )
 
 type SettingsData struct {
-	PaymentDataInQR     *bool              `json:"paymentDataInQR"`
-	ShowNotifications   *bool              `json:"showNotifications"`
-	ShowNsfw            *bool              `json:"showNsfw"`
-	ShippingAddresses   *[]ShippingAddress `json:"shippingAddresses"`
-	LocalCurrency       *string            `json:"localCurrency"`
-	Country             *string            `json:"country"`
-	TermsAndConditions  *string            `json:"termsAndConditions"`
-	RefundPolicy        *string            `json:"refundPolicy"`
-	BlockedNodes        *[]string          `json:"blockedNodes"`
-	StoreModerators     *[]string          `json:"storeModerators"`
-	RecentModerators    *[]string          `json:"recentModerators"`
-	MisPaymentBuffer    *float32           `json:"mispaymentBuffer"`
-	SMTPSettings        *SMTPSettings      `json:"smtpSettings"`
-	Version             *string            `json:"version"`
-	PreferredCurrencies *[]string          `json:"preferredCurrencies"`
+	PaymentDataInQR         *bool              `json:"paymentDataInQR"`
+	ShowNotifications       *bool              `json:"showNotifications"`
+	ShowNsfw                *bool              `json:"showNsfw"`
+	ShippingAddresses       *[]ShippingAddress `json:"shippingAddresses"`
+	LocalCurrency           *string            `json:"localCurrency"`
+	Country                 *string            `json:"country"`
+	TermsAndConditions      *string            `json:"termsAndConditions"`
+	RefundPolicy            *string            `json:"refundPolicy"`
+	BlockedNodes            *[]string          `json:"blockedNodes"`
+	StoreModerators         *[]string          `json:"storeModerators"`
+	RecentModerators        *[]string          `json:"recentModerators"`
+	MisPaymentBuffer        *float32           `json:"mispaymentBuffer"`
+	SMTPSettings            *SMTPSettings      `json:"smtpSettings"`
+	Version                 *string            `json:"version"`
+	PreferredCurrencies     *[]string          `json:"preferredCurrencies"`
+	OnlineBroadcastInterval *int			   `json:"onlineBroadcastInterval"`
 }
 
 type ShippingAddress struct {
