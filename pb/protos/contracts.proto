@@ -311,6 +311,7 @@ message EntityRatingStore {
 message EntityRating {
     string comment               = 1;
     repeated RatingFields fields = 2;
+    string vendorID              = 3;
 
     message RatingFields {
         RatingType type = 1;

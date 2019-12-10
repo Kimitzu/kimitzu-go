@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/OpenBazaar/wallet-interface"
-	"github.com/kimitzu/kimitzu-go/pb"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
+	"github.com/kimitzu/kimitzu-go/pb"
 )
 
 var (
@@ -106,7 +106,9 @@ func (n *OpenBazaarNode) FulfillOrder(fulfillment *pb.OrderFulfillment, contract
 	if err != nil {
 		return err
 	}
+
 	fulfillment.Timestamp = ts
+	fulfillment.BuyerRating.VendorID = listing.VendorID.PeerID
 
 	rs := new(pb.RatingSignature)
 	metadata := new(pb.RatingSignature_TransactionMetadata)
