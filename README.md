@@ -1,7 +1,14 @@
 ﻿# kimitzu-go
-Kimitzu Server Daemon in Go forked from OpenBazaar
+Kimitzu Server Daemon forked from OpenBazaar
 
-This repository contains the OpenBazaar server daemon which handles the heavy lifting for the [OpenBazaar](https://openbazaar.org/) desktop application. The server combines several technologies: A modified [IPFS](https://ipfs.io) node, which itself combines ideas from Git, BitTorrent, and Kademlia. A lightweight wallet for interacting with several cryptocurrency networks. And a JSON API which can be used by a user interface to control the node and browse the network. Find the user interface for the server at [github.com/OpenBazaar/openbazaar-desktop](https://github.com/OpenBazaar/openbazaar-desktop).
+This repository contains the OpenBazaar server daemon used by [Kimitzu Services](https://github.com/kimitzu/kimitzu-services) to crawl and index listings. It also handles profile, wallet, and order processing for the [Kimitzu Client](https://github.com/kimitzu/kimitzu-client).
+
+The primary changes are in the schemas wherein we added additional information such as:
+- Listing Location information
+- Two-way rating system (Service Provider and Vendor)
+- Custom properties for Service Competency Matrix
+
+Other features and APIs on Openbazaar-Go remains as-is in Kimitzu-Go to ensure maximum compatibility and interoperability.
 
 ## Table of Contents
 
@@ -19,15 +26,15 @@ This repository contains the OpenBazaar server daemon which handles the heavy li
 
 ## Install
 
-A typical install of OpenBazaar contains a bundle of the server daemon and user interface. If this is what you are looking for, you can find an installer at https://openbazaar.org/download. If you are looking to run the server daemon by itself or to contribute to development, see below for instructions.
+A typical install of Kimitzu contains a bundle of the server daemon and user interface. If this is what you are looking for, you can find an installer at https://github.com/kimitzu/kimitzu-client/releases. If you are looking to run the server daemon by itself or to contribute to development, see below for instructions.
 
 ### Install Pre-built Packages
 
-The easiest way to run the server is to download a pre-built binary. You can find binaries of our latest release for each operating system [here](https://github.com/kimitzu-foundation/kimitzu-go/releases/).
+The easiest way to run the server is to download a pre-built binary. You can find binaries of our latest release for each operating system [here](https://github.com/kimitzu/kimitzu-go/releases).
 
 ### Build from Source
 
-To build from source you will need to have Go installed and properly configured. Detailed instructions for installing Go and openbazaar-go on each operating system can be found in the [docs package](https://github.com/kimitzu-foundation/kimitzu-go/tree/master/docs).
+To build from source you will need to have Go installed and properly configured. Detailed instructions for installing Go and openbazaar-go on each operating system can be found in the [docs package](./docs).
 
 ## Dependency Management
 
@@ -39,7 +46,7 @@ We are using a [fork](https://github.com/OpenBazaar/go-ipfs) of go-ipfs in the d
 
 ## Updating
 
-You can either pull in remote changes as normal or run `go get -u github.com/kimitzu-foundation/kimitzu-go`.
+You can either pull in remote changes as normal or run `go get -u -v github.com/kimitzu/kimitzu-go`.
 
 ## Usage
 
@@ -94,9 +101,5 @@ Documentation of the OpenBazaar protocol has not been formalized yet. If you wou
 
 `openbazaar-go` exposes an HTTP API which permits high-level interactions on the network and the internal wallet. Find the HTTP API documentation at [https://api.docs.openbazaar.org](https://api.docs.openbazaar.org).
 
-## Contributing
-
-Contributions are definitely welcome! Please read the Contributing [Guidelines](https://github.com/kimitzu-foundation/kimitzu-go/blob/master/CONTRIBUTING.md) before starting.
-
 ## License
-[MIT](https://github.com/kimitzu-foundation/kimitzu-go/blob/master/LICENSE).
+[MIT](LICENSE).
