@@ -8,10 +8,10 @@ RUN go build --ldflags '-extldflags "-static"' -o /opt/openbazaard /go/src/githu
 FROM openbazaar/base:v1.0.0
 
 # Document ports in use
-#   4002 - HTTP(s) API
+#   8100 - HTTP(s) API
 #   4001 - libp2p/IPFS TCP port
 #   9005 - libp2p/IPFS websocket port
-EXPOSE 4001 4002 9005
+EXPOSE 4001 8100 9005
 
 # Define a volume to perist data to. This data contains all the important
 # elements defining a peer so it must be durable as long as the identity exists

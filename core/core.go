@@ -19,14 +19,14 @@ import (
 
 	"github.com/OpenBazaar/multiwallet"
 	"github.com/btcsuite/btcutil/hdkeychain"
+	"github.com/gosimple/slug"
+	"github.com/ipfs/go-ipfs/core"
 	"github.com/kimitzu/kimitzu-go/ipfs"
 	"github.com/kimitzu/kimitzu-go/net"
 	rep "github.com/kimitzu/kimitzu-go/net/repointer"
 	ret "github.com/kimitzu/kimitzu-go/net/retriever"
 	"github.com/kimitzu/kimitzu-go/repo"
 	sto "github.com/kimitzu/kimitzu-go/storage"
-	"github.com/gosimple/slug"
-	"github.com/ipfs/go-ipfs/core"
 	logging "github.com/op/go-logging"
 	"golang.org/x/net/context"
 	"golang.org/x/net/proxy"
@@ -34,12 +34,12 @@ import (
 
 const (
 	// KIMITZU_VERSION - Kimitzu Development Version
-	KIMITZU_VERSION = "0.0.1-dev"
+	KIMITZU_VERSION = "0.2.0-alpha.1"
 	// VERSION - current version
 	VERSION = "0.13.6"
 	// USERAGENT - user-agent header string
 	// Useragent for Kimitzu Nodes would be "openbazaar-kimitzu-go:0.13.3,0.0.1-dev"
-	USERAGENT = "/openbazaar-kimitzu-go:" + VERSION + "," + KIMITZU_VERSION + "/"
+	USERAGENT = "/openbazaar-kimitzu-go: v" + VERSION + ", v" + KIMITZU_VERSION + "/"
 )
 
 var log = logging.MustGetLogger("core")

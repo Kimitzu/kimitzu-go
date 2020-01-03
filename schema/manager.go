@@ -15,8 +15,8 @@ import (
 
 	config "gx/ipfs/QmUAuYuiafnJRZxDDX7MuruMNsicYNuyub5vUeAcupUBNs/go-ipfs-config"
 
-	"github.com/kimitzu/kimitzu-go/ipfs"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
+	"github.com/kimitzu/kimitzu-go/ipfs"
 	_ "github.com/mutecomm/go-sqlcipher"
 	"github.com/tyler-smith/go-bip39"
 )
@@ -522,7 +522,7 @@ func MustDefaultConfig() *config.Config {
 			"/ip6/::/tcp/9005/ws",
 		},
 		API:     []string{""},
-		Gateway: []string{"/ip4/0.0.0.0/tcp/4002"},
+		Gateway: []string{"/ip4/0.0.0.0/tcp/8100"},
 	}
 	conf.Bootstrap = config.BootstrapPeerStrings(bootstrapPeers)
 

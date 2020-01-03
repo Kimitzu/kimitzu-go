@@ -8,7 +8,7 @@ Assuming you are on a home network 192.168.1.0/24, set the gateway address to:
 
 ```
 "Addresses": {
-    "Gateway": "/ip4/192.168.1.X/tcp/4002",
+    "Gateway": "/ip4/192.168.1.X/tcp/8100",
 }
 ```
 

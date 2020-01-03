@@ -208,7 +208,7 @@ func configFixture() []byte {
   "Addresses": {
     "API": "",
     "Announce": null,
-    "Gateway": "/ip4/127.0.0.1/tcp/4002",
+    "Gateway": "/ip4/127.0.0.1/tcp/8100",
     "NoAnnounce": null,
     "Swarm": [
       "/ip4/0.0.0.0/tcp/4001",
