@@ -36,7 +36,7 @@ const (
 	// KIMITZU_VERSION - Kimitzu Development Version
 	KIMITZU_VERSION = "0.2.0-alpha.1"
 	// VERSION - current version
-	VERSION = "0.13.6"
+	VERSION = "0.13.7"
 	// USERAGENT - user-agent header string
 	// Useragent for Kimitzu Nodes would be "openbazaar-kimitzu-go:0.13.3,0.0.1-dev"
 	USERAGENT = "/openbazaar-kimitzu-go: v" + VERSION + ", v" + KIMITZU_VERSION + "/"

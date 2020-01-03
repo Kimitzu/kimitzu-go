@@ -57,7 +57,7 @@ It will use git to checkout the source code into `$GOPATH/src/github.com/kimitzu
 
 Checkout a release version:
 ```
-git checkout v0.13.6
+git checkout v0.13.7
 ```
 
 Note: `go get` leaves the repo pointing at `master` which is a branch used for active development. Running OpenBazaar from `master` is NOT recommended. Check the [release versions](https://github.com/kimitzu-foundation/kimitzu-go/releases) for the available versions that you use iin checkout.

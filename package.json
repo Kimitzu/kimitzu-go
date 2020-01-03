@@ -2,7 +2,7 @@
   "name": "kimitzu-ob-go",
   "author": "Kimitzu Foundation",
   "version": "0.2.0-alpha.1",
-  "ob-version": "0.13.6",
+  "ob-version": "0.13.7",
   "language": "english",
   "license": "",
   "bugs": {
