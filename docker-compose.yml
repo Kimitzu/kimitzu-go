@@ -10,7 +10,7 @@ services:
       - .:/go/src/github.com/kimitzu-foundation/kimitzu-go
     ports:
       - "4001:4001"
-      - "4002:4002"
+      - "8100:8100"
       - "9005:9005"
     security_opt:
       - seccomp:unconfined #req: delve for golang
@@ -18,7 +18,7 @@ services:
     image: openbazaar/server
     ports:
       - 4001
-      - 4002
+      - 8100
       - 9005
     volumes:
       - obdata:/var/lib/openbazaar
