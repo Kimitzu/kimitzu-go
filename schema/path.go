@@ -39,9 +39,9 @@ func OpenbazaarPathTransform(basePath string, testModeEnabled bool) (path string
 }
 func directoryName(isTestnet bool) (directoryName string) {
 	if runtime.GOOS == "linux" {
-		directoryName = ".openbazaar"
+		directoryName = ".kimitzu-ob"
 	} else {
-		directoryName = "openbazaar"
+		directoryName = "kimitzu-ob"
 	}
 
 	if isTestnet {
