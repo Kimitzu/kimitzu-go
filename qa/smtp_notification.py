@@ -32,7 +32,7 @@ class SMTPTest(OpenBazaarTestFramework):
         smtp = {
             "smtpSettings" : {
                 "notifications": True,
-                "serverAddress": "0.0.0.0:1024",
+                "serverAddress": "127.0.0.1:1024",
                 "username": "usr",
                 "password": "passwd",
                 "senderEmail": "openbazaar@test.org",
@@ -58,7 +58,7 @@ class SMTPTest(OpenBazaarTestFramework):
             raise TestFailure("SMTPTest - FAIL: Settings GET failed. Reason: %s", resp["reason"])
 
         # check notifications
-        addr = "0.0.0.0:1024"
+        addr = "127.0.0.1:1024"
         class_name = "test_framework.smtp_server.SMTPTestServer"
         proc = subprocess.Popen(["python", "-m", "smtpd", "-n", "-c", class_name, addr])
 

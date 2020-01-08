@@ -3,10 +3,10 @@
 ##
 
 ios_framework:
-	gomobile bind -target=ios github.com/kimitzu-foundation/kimitzu-go/mobile
+	gomobile bind -target=ios github.com/kimitzu/kimitzu-go/mobile
 
 android_framework:
-	gomobile bind -target=android github.com/kimitzu-foundation/kimitzu-go/mobile
+	gomobile bind -target=android github.com/kimitzu/kimitzu-go/mobile
 
 ##
 ## Protobuf compilation

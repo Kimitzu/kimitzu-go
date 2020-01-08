@@ -24,7 +24,7 @@ Next, set the gateway address to:
 
 ```
 "Addresses": {
-    "Gateway": "/ip4/0.0.0.0/tcp/80",
+    "Gateway": "/ip4/127.0.0.1/tcp/80",
 }
 ```
 

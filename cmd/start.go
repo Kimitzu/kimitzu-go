@@ -116,6 +116,7 @@ func (x *Start) Execute(args []string) error {
 
 	// Set repo path
 	repoPath, err := repo.GetRepoPath(isTestnet)
+
 	if err != nil {
 		return err
 	}
@@ -311,10 +312,10 @@ func (x *Start) Execute(args []string) error {
 	} else if x.DualStack {
 		cfg.Addresses.Swarm = []string{}
 		cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, onionAddrString)
-		cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip4/0.0.0.0/tcp/4001")
+		cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip4/127.0.0.1/tcp/4001")
 		cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip6/::/tcp/4001")
 		cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip6/::/tcp/9005/ws")
-		cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip4/0.0.0.0/tcp/9005/ws")
+		cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip4/127.0.0.1/tcp/9005/ws")
 	}
 	// Iterate over our address and process them as needed
 	var (
@@ -340,7 +341,7 @@ func (x *Start) Execute(args []string) error {
 				return err
 			}
 			cfg.Addresses.Swarm = append(cfg.Addresses.Swarm[:i], cfg.Addresses.Swarm[i+1:]...)
-			cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip4/0.0.0.0/udp/"+strconv.Itoa(port)+"/utp")
+			cfg.Addresses.Swarm = append(cfg.Addresses.Swarm, "/ip4/127.0.0.1/udp/"+strconv.Itoa(port)+"/utp")
 			break
 		} else if p[0].Name == "onion" {
 			usingTor = true
