@@ -10,8 +10,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/kimitzu/kimitzu-go/schema"
 	"github.com/ipfs/go-ipfs/repo/fsrepo"
+	"github.com/kimitzu/kimitzu-go/schema"
 
 	"os"
 
@@ -79,20 +79,34 @@ func ChangeAPICredentials(repoPath, username, password string, authenticated boo
 
 }
 
-// KimitzuInfo - returns the essential information such as repository path
+type NodeInfo struct {
+	RepoPath      string `json:"repoPath"`
+	Cookie        string `json:"cookie"`
+	Username      string `json:"username"`
+	Password      string `json:"password"`
+	Authenticated bool   `json:"authenticated"`
+	OBVersion     string `json:"obVersion"`
+}
+
+// KimitzuInfo - returns the essential information such as repository path. Endpoint only responds if accessed on localhost.
 func KimitzuInfo(node *core.OpenBazaarNode, cookie http.Cookie, config schema.APIConfig) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !strings.HasPrefix(r.RemoteAddr, "127.0.0.1") {
 			http.Error(w, fmt.Sprintf(`{"error": "Unauthorized", "origin": "%v"}`, r.RemoteAddr), 401)
 			return
 		}
-		fmt.Fprintf(w,
-			`{"repoPath": "%v", "cookie": "%v", "username": "%v", "password": "%v", "authenticated": %v}`,
-			strings.ReplaceAll(node.RepoPath, "\\", "\\\\"),
-			cookie.String(),
-			config.Username,
-			config.Password,
-			config.Authenticated)
+
+		nodeInfo := NodeInfo{}
+		nodeInfo.RepoPath = node.RepoPath
+		nodeInfo.Cookie = cookie.String()
+		nodeInfo.Username = config.Username
+		nodeInfo.Password = config.Password
+		nodeInfo.Authenticated = config.Authenticated
+		nodeInfo.OBVersion = node.Version
+
+		nodeInfoStr, _ := json.Marshal(nodeInfo)
+
+		fmt.Fprintf(w, string(nodeInfoStr))
 		return
 	}
 

@@ -602,6 +602,7 @@ func (x *Start) Execute(args []string) error {
 		TestnetEnable:                 x.Testnet,
 		TorDialer:                     torDialer,
 		UserAgent:                     core.USERAGENT,
+		Version:                       core.VERSION,
 		IPNSQuorumSize:                uint(ipnsExtraConfig.DHTQuorumSize),
 	}
 	core.Node.PublishLock.Lock()

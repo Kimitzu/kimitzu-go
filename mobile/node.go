@@ -31,6 +31,10 @@ import (
 	wi "github.com/OpenBazaar/wallet-interface"
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcutil/hdkeychain"
+	"github.com/ipfs/go-ipfs/commands"
+	ipfscore "github.com/ipfs/go-ipfs/core"
+	"github.com/ipfs/go-ipfs/core/corehttp"
+	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"github.com/kimitzu/kimitzu-go/api"
 	"github.com/kimitzu/kimitzu-go/core"
 	"github.com/kimitzu/kimitzu-go/ipfs"
@@ -46,10 +50,6 @@ import (
 	"github.com/kimitzu/kimitzu-go/wallet"
 	lis "github.com/kimitzu/kimitzu-go/wallet/listeners"
 	"github.com/kimitzu/kimitzu-go/wallet/resync"
-	"github.com/ipfs/go-ipfs/commands"
-	ipfscore "github.com/ipfs/go-ipfs/core"
-	"github.com/ipfs/go-ipfs/core/corehttp"
-	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"github.com/natefinch/lumberjack"
 	"github.com/op/go-logging"
 	"github.com/tyler-smith/go-bip39"
@@ -286,6 +286,7 @@ func NewNodeWithConfig(config *NodeConfig, password string, mnemonic string) (*N
 		PushNodes:                     pushNodes,
 		RepoPath:                      config.RepoPath,
 		UserAgent:                     core.USERAGENT,
+		Version:                       core.VERSION,
 		IPNSQuorumSize:                uint(ipnsExtraConfig.DHTQuorumSize),
 	}
 

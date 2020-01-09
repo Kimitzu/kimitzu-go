@@ -37,15 +37,15 @@ import (
 	"github.com/OpenBazaar/wallet-interface"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcutil/base58"
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes"
+	"github.com/ipfs/go-ipfs/core/coreapi"
+	"github.com/ipfs/go-ipfs/repo/fsrepo"
 	"github.com/kimitzu/kimitzu-go/core"
 	"github.com/kimitzu/kimitzu-go/ipfs"
 	"github.com/kimitzu/kimitzu-go/pb"
 	"github.com/kimitzu/kimitzu-go/repo"
 	"github.com/kimitzu/kimitzu-go/schema"
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"
-	"github.com/ipfs/go-ipfs/core/coreapi"
-	"github.com/ipfs/go-ipfs/repo/fsrepo"
 )
 
 type JSONAPIConfig struct {
@@ -902,7 +902,7 @@ func (i *jsonAPIHandler) POSTSettings(w http.ResponseWriter, r *http.Request) {
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	settings.Version = &i.node.UserAgent
+	settings.Version = &i.node.Version
 	ser, err := json.MarshalIndent(settings, "", "    ")
 	if err != nil {
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
@@ -969,7 +969,7 @@ func (i *jsonAPIHandler) GETSettings(w http.ResponseWriter, r *http.Request) {
 		ErrorResponse(w, http.StatusNotFound, err.Error())
 		return
 	}
-	settings.Version = &i.node.UserAgent
+	settings.Version = &i.node.Version
 	settingsJSON, err := json.MarshalIndent(&settings, "", "    ")
 	if err != nil {
 		ErrorResponse(w, http.StatusInternalServerError, err.Error())
@@ -3508,10 +3508,10 @@ func (i *jsonAPIHandler) GETRatings(w http.ResponseWriter, r *http.Request) {
 	} else {
 		// Other peer ID without slug, basically everything
 		type resp struct {
-			Count   int                  `json:"count"`
-			Average float32              `json:"average"`
-			Ratings []string             `json:"ratings"`
-			Kimitzu   core.KimitzuRatingResp `json:"kimitzu"`
+			Count   int                    `json:"count"`
+			Average float32                `json:"average"`
+			Ratings []string               `json:"ratings"`
+			Kimitzu core.KimitzuRatingResp `json:"kimitzu"`
 		}
 		ratingRet := new(resp)
 		ratingRet.Kimitzu = kimitzuresp
