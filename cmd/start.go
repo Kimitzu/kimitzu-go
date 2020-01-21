@@ -1009,37 +1009,17 @@ func InitializeRepo(dataDir, password, mnemonic string, testnet bool, creationDa
 }
 
 func printSplashScreen(verbose bool, testnet bool) {
-	red := color.New(color.FgRed)
-	white := color.New(color.FgWhite)
+	cyan := color.New(color.FgCyan)
 
-	for i, l := range []string{
-		"             ", ".---.                    ",
-		`_______      `, `|   |          .---.     `,
-		"\\  ___ `'.   ", `'---'          |   |.--. `,
-		` ' |--.\  \  `, `.---.          |   ||__| `,
-		` | |    \  ' `, `|   |          |   |.--. `,
-		` | |     |  '`, `|   |    __    |   ||  | `,
-		` | |     |  |`, `|   | .:--.'.  |   ||  | `,
-		` | |     ' .'`, `|   |/ |   \ | |   ||  | `,
-		` | |___.' /' `, "|   |`\" __ | | |   ||  | ",
-		`/_______.'/  `, `|   | .'.''| | |   ||__| `,
-		`\_______|/`, `__.'   '/ /   | |_'---'     `,
-		`         `, `|      ' \ \._,\ '/          `,
-		`         `, "|____.'   `--'  `\"           "} {
-		if i%2 == 0 {
-			if _, err := red.Printf(l); err != nil {
-				log.Debug(err)
-				return
-			}
-			continue
-		}
-		if _, err := white.Println(l); err != nil {
-			log.Debug(err)
-			return
-		}
+	for _, l := range []string{
+		" _  ___           _ _             ",
+		"| |/ (_)_ __ ___ (_) |_ _____   _ ",
+		"| ' /| | '_ ` _ \\| | __|_  / | | |",
+		"| . \\| | | | | | | | |_ / /| |_| |",
+		"|_|\\_\\_|_| |_| |_|_|\\__/___|\\__,_|"} {
+		cyan.Println(l)
 	}
-	red.DisableColor()
-	white.DisableColor()
+	cyan.DisableColor()
 	fmt.Println("")
 	if testnet {
 		fmt.Println("Running in Testnet")
