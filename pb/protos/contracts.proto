@@ -20,6 +20,12 @@ message RicardianContract {
     repeated string errors                             = 11;
 }
 
+message Contact {
+    string email                            = 1;
+    string phoneNumber                      = 2;
+    string website                          = 3;
+}
+
 message Listing {
     string slug                             = 1;
     ID vendorID                             = 2;
@@ -33,6 +39,7 @@ message Listing {
     string refundPolicy                     = 10;
     
     Address location                        = 6661;
+    Contact contact                         = 6662;
 
     message Metadata {
         uint32 version                          = 1;
