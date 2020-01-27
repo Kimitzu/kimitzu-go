@@ -46,3 +46,5 @@ openbazaar-go*
 # Build files 
 
 openbazaard
+mobile-sources.jar
+mobile.aar
