@@ -1,4 +1,6 @@
-﻿# kimitzu-go
+# This project is discontinued.
+
+# kimitzu-go
 Kimitzu Server Daemon forked from OpenBazaar
 
 This repository contains the OpenBazaar server daemon used by [Kimitzu Services](https://github.com/kimitzu/kimitzu-services) to crawl and index listings. It also handles profile, wallet, and order processing for the [Kimitzu Client](https://github.com/kimitzu/kimitzu-client).
